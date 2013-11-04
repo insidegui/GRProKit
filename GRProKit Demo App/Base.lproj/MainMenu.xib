@@ -738,7 +738,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <popUpButtonCell key="cell" type="push" title="Pro Pop Up Button " bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bVM-98-65r" id="t4Q-KE-wPc" customClass="GRProPopUpButtonCell">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="YQx-6z-3mX">
                                                 <items>
                                                     <menuItem title="Pro Pop Up Button " state="on" id="bVM-98-65r"/>
@@ -770,7 +770,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="KHQ-HN-dJG" customClass="GRProSliderCell"/>
                     </slider>
-                    <progressIndicator focusRingType="none" maxValue="100" style="bar" id="eYH-hv-BOk" customClass="GRProProgressIndicator">
+                    <progressIndicator focusRingType="none" maxValue="100" style="bar" id="eYH-hv-BOk">
                         <rect key="frame" x="12" y="6" width="161" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </progressIndicator>
