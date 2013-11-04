@@ -1,0 +1,400 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD7717DC1822AC5D00482CBE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7717DB1822AC5D00482CBE /* Cocoa.framework */; };
+		DD7717E61822AC5D00482CBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD7717E41822AC5D00482CBE /* InfoPlist.strings */; };
+		DD7717E81822AC5D00482CBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7717E71822AC5D00482CBE /* main.m */; };
+		DD7717EC1822AC5D00482CBE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DD7717EA1822AC5D00482CBE /* Credits.rtf */; };
+		DD7717EF1822AC5D00482CBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7717EE1822AC5D00482CBE /* AppDelegate.m */; };
+		DD7717F21822AC5D00482CBE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7717F01822AC5D00482CBE /* MainMenu.xib */; };
+		DD7717F41822AC5D00482CBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7717F31822AC5D00482CBE /* Images.xcassets */; };
+		DD7718531822ACC000482CBE /* GRProKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD77184D1822AC7900482CBE /* GRProKit.framework */; };
+		DD7718541822AD0500482CBE /* GRProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD77184D1822AC7900482CBE /* GRProKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DD77184C1822AC7900482CBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD7718471822AC7800482CBE /* GRProKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DD7718191822AC7800482CBE;
+			remoteInfo = GRProKit;
+		};
+		DD7718501822ACAB00482CBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD7718471822AC7800482CBE /* GRProKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DD7718181822AC7800482CBE;
+			remoteInfo = GRProKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DD7718521822ACB800482CBE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DD7718531822ACC000482CBE /* GRProKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DD7717D81822AC5D00482CBE /* GRProKit Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GRProKit Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7717DB1822AC5D00482CBE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DD7717DE1822AC5D00482CBE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		DD7717DF1822AC5D00482CBE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DD7717E01822AC5D00482CBE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DD7717E31822AC5D00482CBE /* GRProKit Demo App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GRProKit Demo App-Info.plist"; sourceTree = "<group>"; };
+		DD7717E51822AC5D00482CBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DD7717E71822AC5D00482CBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DD7717E91822AC5D00482CBE /* GRProKit Demo App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GRProKit Demo App-Prefix.pch"; sourceTree = "<group>"; };
+		DD7717EB1822AC5D00482CBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		DD7717ED1822AC5D00482CBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DD7717EE1822AC5D00482CBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DD7717F11822AC5D00482CBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DD7717F31822AC5D00482CBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DD7717FA1822AC5D00482CBE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DD7718471822AC7800482CBE /* GRProKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRProKit.xcodeproj; path = GRProKit/GRProKit.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD7717D51822AC5D00482CBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD7717DC1822AC5D00482CBE /* Cocoa.framework in Frameworks */,
+				DD7718541822AD0500482CBE /* GRProKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD7717CF1822AC5D00482CBE = {
+			isa = PBXGroup;
+			children = (
+				DD7718471822AC7800482CBE /* GRProKit.xcodeproj */,
+				DD7717E11822AC5D00482CBE /* GRProKit Demo App */,
+				DD7717DA1822AC5D00482CBE /* Frameworks */,
+				DD7717D91822AC5D00482CBE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD7717D91822AC5D00482CBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD7717D81822AC5D00482CBE /* GRProKit Demo App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD7717DA1822AC5D00482CBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD7717DB1822AC5D00482CBE /* Cocoa.framework */,
+				DD7717FA1822AC5D00482CBE /* XCTest.framework */,
+				DD7717DD1822AC5D00482CBE /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD7717DD1822AC5D00482CBE /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD7717DE1822AC5D00482CBE /* AppKit.framework */,
+				DD7717DF1822AC5D00482CBE /* CoreData.framework */,
+				DD7717E01822AC5D00482CBE /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		DD7717E11822AC5D00482CBE /* GRProKit Demo App */ = {
+			isa = PBXGroup;
+			children = (
+				DD7717ED1822AC5D00482CBE /* AppDelegate.h */,
+				DD7717EE1822AC5D00482CBE /* AppDelegate.m */,
+				DD7717F01822AC5D00482CBE /* MainMenu.xib */,
+				DD7717F31822AC5D00482CBE /* Images.xcassets */,
+				DD7717E21822AC5D00482CBE /* Supporting Files */,
+			);
+			path = "GRProKit Demo App";
+			sourceTree = "<group>";
+		};
+		DD7717E21822AC5D00482CBE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD7717E31822AC5D00482CBE /* GRProKit Demo App-Info.plist */,
+				DD7717E41822AC5D00482CBE /* InfoPlist.strings */,
+				DD7717E71822AC5D00482CBE /* main.m */,
+				DD7717E91822AC5D00482CBE /* GRProKit Demo App-Prefix.pch */,
+				DD7717EA1822AC5D00482CBE /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DD7718481822AC7800482CBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD77184D1822AC7900482CBE /* GRProKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD7717D71822AC5D00482CBE /* GRProKit Demo App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD7718091822AC5D00482CBE /* Build configuration list for PBXNativeTarget "GRProKit Demo App" */;
+			buildPhases = (
+				DD7717D41822AC5D00482CBE /* Sources */,
+				DD7717D51822AC5D00482CBE /* Frameworks */,
+				DD7717D61822AC5D00482CBE /* Resources */,
+				DD7718521822ACB800482CBE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD7718511822ACAB00482CBE /* PBXTargetDependency */,
+			);
+			name = "GRProKit Demo App";
+			productName = "GRProKit Demo App";
+			productReference = DD7717D81822AC5D00482CBE /* GRProKit Demo App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD7717D01822AC5D00482CBE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Guilherme Rambo";
+			};
+			buildConfigurationList = DD7717D31822AC5D00482CBE /* Build configuration list for PBXProject "GRProKit Demo App" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD7717CF1822AC5D00482CBE;
+			productRefGroup = DD7717D91822AC5D00482CBE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DD7718481822AC7800482CBE /* Products */;
+					ProjectRef = DD7718471822AC7800482CBE /* GRProKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				DD7717D71822AC5D00482CBE /* GRProKit Demo App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DD77184D1822AC7900482CBE /* GRProKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRProKit.framework;
+			remoteRef = DD77184C1822AC7900482CBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD7717D61822AC5D00482CBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD7717E61822AC5D00482CBE /* InfoPlist.strings in Resources */,
+				DD7717F41822AC5D00482CBE /* Images.xcassets in Resources */,
+				DD7717EC1822AC5D00482CBE /* Credits.rtf in Resources */,
+				DD7717F21822AC5D00482CBE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD7717D41822AC5D00482CBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD7717EF1822AC5D00482CBE /* AppDelegate.m in Sources */,
+				DD7717E81822AC5D00482CBE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD7718511822ACAB00482CBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GRProKit;
+			targetProxy = DD7718501822ACAB00482CBE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DD7717E41822AC5D00482CBE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD7717E51822AC5D00482CBE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DD7717EA1822AC5D00482CBE /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD7717EB1822AC5D00482CBE /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		DD7717F01822AC5D00482CBE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD7717F11822AC5D00482CBE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD7718071822AC5D00482CBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DD7718081822AC5D00482CBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DD77180A1822AC5D00482CBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GRProKit Demo App/GRProKit Demo App-Prefix.pch";
+				INFOPLIST_FILE = "GRProKit Demo App/GRProKit Demo App-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DD77180B1822AC5D00482CBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GRProKit Demo App/GRProKit Demo App-Prefix.pch";
+				INFOPLIST_FILE = "GRProKit Demo App/GRProKit Demo App-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD7717D31822AC5D00482CBE /* Build configuration list for PBXProject "GRProKit Demo App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD7718071822AC5D00482CBE /* Debug */,
+				DD7718081822AC5D00482CBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD7718091822AC5D00482CBE /* Build configuration list for PBXNativeTarget "GRProKit Demo App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD77180A1822AC5D00482CBE /* Debug */,
+				DD77180B1822AC5D00482CBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD7717D01822AC5D00482CBE /* Project object */;
+}
