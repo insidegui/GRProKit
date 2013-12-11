@@ -366,7 +366,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [self drawRectOriginal:rect];
     
     // if this theme frame is not for a GRProWindow, we don't do any custom drawing and keep the system default
-    if (![[self window] isKindOfClass:[GRProWindow class]] && ![[self window] isKindOfClass:[NSPanel class]]) return;
+    if (![[self window] isKindOfClass:[GRProWindow class]]) return;
     
     // clear the canvas
     [[NSColor clearColor] setFill];
