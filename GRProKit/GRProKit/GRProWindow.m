@@ -48,6 +48,10 @@
 // window title color - not key window
 #define kProWindowTitleTextColor [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
 
+// left margin for autosave button
+#define kAdditionalAutosaveButtonMarginX 28.0
+#define kAdditionalAutosaveButtonMarginY 1.0
+
 float toolbarHeightForWindow(NSWindow *window);
 
 @implementation GRProWindow
@@ -332,11 +336,18 @@ float toolbarHeightForWindow(NSWindow *window);
 
 @end
 
-// define the methods we are going to override
+// define the private methods we are going to use/override
 @interface NSView (Swizzles)
 - (void)drawRectOriginal:(NSRect)rect;
 - (BOOL)_mouseInGroup:(NSButton*)widget;
 - (void)updateTrackingAreas;
+- (NSPoint)_autosaveButtonOriginOriginal;
+- (NSPoint)_autosaveButtonOrigin;
+- (NSPoint)_autosaveButtonSeparatorFieldOriginOriginal;
+- (NSPoint)_autosaveButtonSeparatorFieldOrigin;
+
+- (id)autosaveButton;
+- (id)_autosaveButtonSeparatorField;
 @end
 
 @implementation GRProThemeFrame
@@ -351,13 +362,77 @@ float toolbarHeightForWindow(NSWindow *window);
     // and put our custom drawRect: method in it's place
     
     Method m0 = class_getInstanceMethod([self class], @selector(drawRect:));
-
+    
     class_addMethod(grayFrameClass, @selector(drawRectOriginal:), method_getImplementation(m0), method_getTypeEncoding(m0));
-
+    
     Method m1 = class_getInstanceMethod(grayFrameClass, @selector(drawRect:));
     Method m2 = class_getInstanceMethod(grayFrameClass, @selector(drawRectOriginal:));
-
+    
     method_exchangeImplementations(m1, m2);
+    
+    // the following code will change the original NSThemeFrame's _autosaveButtonOrigin method's name to _autosaveButtonOriginOriginal
+    // and put our custom _autosaveButtonOrigin method in it's place
+    
+    Method m3 = class_getInstanceMethod([self class], @selector(_autosaveButtonOrigin));
+    
+    class_addMethod(grayFrameClass, @selector(_autosaveButtonOriginOriginal), method_getImplementation(m3), method_getTypeEncoding(m3));
+    
+    Method m4 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonOriginOriginal));
+    Method m5 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonOrigin));
+    
+    method_exchangeImplementations(m4, m5);
+    
+    // the following code will change the original NSThemeFrame's _autosaveButtonSeparatorFieldOrigin method's name to _autosaveButtonSeparatorFieldOriginOriginal
+    // and put our custom _autosaveButtonSeparatorFieldOrigin method in it's place
+    
+    Method m6 = class_getInstanceMethod([self class], @selector(_autosaveButtonSeparatorFieldOrigin));
+    
+    class_addMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOriginOriginal), method_getImplementation(m6), method_getTypeEncoding(m6));
+    
+    Method m7 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOriginOriginal));
+    Method m8 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOrigin));
+    
+    method_exchangeImplementations(m7, m8);
+}
+
++ (NSMutableAttributedString *)proAttributedStringWithString:(NSString *)aString
+{
+    // set the correct font attributes with the "Pro" look
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:aString];
+    NSRange titleRange = NSMakeRange(0, [string length]);
+    [string addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.01 alpha:1.0] range:titleRange];
+    
+    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:@"Helvetica" size:13.0];
+    NSFont *titleFont = [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:13.0];
+    [string addAttribute:NSFontAttributeName value:titleFont range:titleRange];
+    
+    return string;
+}
+
+// here we add an additional margin to the separator between the "edited" message and the window's title
+// we also use this method to customize the separator's look
+- (NSPoint)_autosaveButtonSeparatorFieldOrigin
+{
+    // apply our new attributed string as the button's attributedTitle
+    [[self _autosaveButtonSeparatorField] setFont:[NSFont fontWithName:@"Helvetica" size:13.0]];
+    [[self _autosaveButtonSeparatorField] setTextColor:[NSColor colorWithCalibratedWhite:0.01 alpha:1.0]];
+    
+    NSPoint point = [self _autosaveButtonSeparatorFieldOriginOriginal];
+    point.x += kAdditionalAutosaveButtonMarginX;
+    point.y += kAdditionalAutosaveButtonMarginY;
+    return point;
+}
+
+// here we add an additional margin to the left of the autosave button (the "edited" message and little arrow)
+// we also use this method to customize the "edited" label look
+- (NSPoint)_autosaveButtonOrigin
+{
+    [[self autosaveButton] setAttributedTitle:[GRProThemeFrame proAttributedStringWithString:[[self autosaveButton] title]]];
+    
+    NSPoint point = [self _autosaveButtonOriginOriginal];
+    point.x += kAdditionalAutosaveButtonMarginX;
+    point.y += kAdditionalAutosaveButtonMarginY;
+    return point;
 }
 
 // NSThemeFrame's drawRect, here we draw our custom window goodness
