@@ -151,7 +151,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (void)layoutTitleLabel
 {
     // calculate correct title frame and initialize the label
-    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(0, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
+    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(8, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
     
     // if for some reason our title is not available, we don't want to crash :)
     NSString *title = (self.title) ? self.title : @"";
