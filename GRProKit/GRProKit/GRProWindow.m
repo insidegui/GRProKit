@@ -51,6 +51,8 @@
 // left margin for autosave button
 #define kAdditionalAutosaveButtonMarginX 28.0
 #define kAdditionalAutosaveButtonMarginY 1.0
+// the left margin for autosave button when the document is not edited
+#define kAdditionalAutosaveButtonMarginXNotEdited 5.0
 
 float toolbarHeightForWindow(NSWindow *window);
 
@@ -61,6 +63,8 @@ float toolbarHeightForWindow(NSWindow *window);
     GRProThemeWidget *_miniaturizeButton;
     
     GRProLabel *_titleLabel;
+    
+    id _autosaveButton;
 }
 
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
@@ -73,7 +77,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self standardWindowButton:NSWindowCloseButton] setHidden:YES];
     [[self standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
-
+    
     [self layoutTitleLabel];
     
     [self layoutTrafficLights];
@@ -116,7 +120,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [_miniaturizeButton setAction:@selector(performAction:)];
     [_miniaturizeButton setEnabled:(self.styleMask & NSMiniaturizableWindowMask)];
     [[self.contentView superview] addSubview:_miniaturizeButton];
-
+    
     // setup zoom button
     NSRect zoomButtonRect = NSMakeRect(miniaturizeButtonRect.origin.x+kTrafficLightSize, buttonY, kTrafficLightSize, kTrafficLightSize);
     _zoomButton = [[GRProThemeWidget alloc] initWithFrame:zoomButtonRect];
@@ -155,7 +159,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (void)layoutTitleLabel
 {
     // calculate correct title frame and initialize the label
-    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(8, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
+    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(0, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
     
     // if for some reason our title is not available, we don't want to crash :)
     NSString *title = (self.title) ? self.title : @"";
@@ -337,6 +341,10 @@ float toolbarHeightForWindow(NSWindow *window);
 @end
 
 // define the private methods we are going to use/override
+@interface NSWindow (Swizzles)
+- (long long)_documentEditingState;
+@end
+
 @interface NSView (Swizzles)
 - (void)drawRectOriginal:(NSRect)rect;
 - (BOOL)_mouseInGroup:(NSButton*)widget;
@@ -430,7 +438,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self autosaveButton] setAttributedTitle:[GRProThemeFrame proAttributedStringWithString:[[self autosaveButton] title]]];
     
     NSPoint point = [self _autosaveButtonOriginOriginal];
-    point.x += kAdditionalAutosaveButtonMarginX;
+    point.x += ([[self window] _documentEditingState] > 0)? kAdditionalAutosaveButtonMarginX : kAdditionalAutosaveButtonMarginXNotEdited;
     point.y += kAdditionalAutosaveButtonMarginY;
     return point;
 }
@@ -441,7 +449,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [self drawRectOriginal:rect];
     
     // if this theme frame is not for a GRProWindow, we don't do any custom drawing and keep the system default
-    if (![[self window] isKindOfClass:[GRProWindow class]]) return;
+    if (![[self window] isKindOfClass:[GRProWindow class]] && ![[self window] isKindOfClass:[NSPanel class]]) return;
     
     // clear the canvas
     [[NSColor clearColor] setFill];
@@ -513,7 +521,7 @@ float toolbarHeightForWindow(NSWindow *window);
     NSRect bottomSeparatorRect = NSMakeRect(0, windowContentBorderHeight-1, NSWidth(self.frame), 1);
     [kProWindowTitleSeparatorColor setFill];
     NSRectFill(bottomSeparatorRect);
-
+    
     // draw footer highlight
     NSRect bottomHighlightRect = NSMakeRect(0, windowContentBorderHeight-2, NSWidth(self.frame), 1);
     [kProWindowBottomHighlightColor setFill];
@@ -541,13 +549,13 @@ float toolbarHeightForWindow(NSWindow *window)
     float toolbarHeight = 0.0;
     
     NSRect windowFrame;
-
+    
     toolbar = [window toolbar];
-
+    
     if(toolbar && [toolbar isVisible]) {
         windowFrame = [NSWindow contentRectForFrameRect:[window frame] styleMask:[window styleMask]];
         toolbarHeight = NSHeight(windowFrame) - NSHeight([[window contentView] frame]);
     }
-
+    
     return toolbarHeight;
 }
