@@ -49,10 +49,13 @@
 #define kProWindowTitleTextColor [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
 
 // left margin for autosave button
-#define kAdditionalAutosaveButtonMarginX 28.0
+#define kAdditionalAutosaveButtonMarginX 26.0
 #define kAdditionalAutosaveButtonMarginY 1.0
 // the left margin for autosave button when the document is not edited
 #define kAdditionalAutosaveButtonMarginXNotEdited 5.0
+// left margin for file button (document icon)
+#define kAdditionalFileButtonMarginXNotEdited -8.0
+#define kAdditionalFileButtonMarginX 21.0
 
 float toolbarHeightForWindow(NSWindow *window);
 
@@ -353,6 +356,8 @@ float toolbarHeightForWindow(NSWindow *window);
 - (NSPoint)_autosaveButtonOrigin;
 - (NSPoint)_autosaveButtonSeparatorFieldOriginOriginal;
 - (NSPoint)_autosaveButtonSeparatorFieldOrigin;
+- (NSPoint)_fileButtonOrigin;
+- (NSPoint)_fileButtonOriginOriginal;
 
 - (id)autosaveButton;
 - (id)_autosaveButtonSeparatorField;
@@ -401,6 +406,18 @@ float toolbarHeightForWindow(NSWindow *window);
     Method m8 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOrigin));
     
     method_exchangeImplementations(m7, m8);
+    
+    // the following code will change the original NSThemeFrame's _fileButtonOrigin method's name to _fileButtonOriginOriginal
+    // and put our custom _fileButtonOrigin method in it's place
+    
+    Method m9 = class_getInstanceMethod([self class], @selector(_fileButtonOrigin));
+    
+    class_addMethod(grayFrameClass, @selector(_fileButtonOriginOriginal), method_getImplementation(m9), method_getTypeEncoding(m9));
+    
+    Method m10 = class_getInstanceMethod(grayFrameClass, @selector(_fileButtonOriginOriginal));
+    Method m11 = class_getInstanceMethod(grayFrameClass, @selector(_fileButtonOrigin));
+    
+    method_exchangeImplementations(m10, m11);
 }
 
 + (NSMutableAttributedString *)proAttributedStringWithString:(NSString *)aString
@@ -415,6 +432,14 @@ float toolbarHeightForWindow(NSWindow *window);
     [string addAttribute:NSFontAttributeName value:titleFont range:titleRange];
     
     return string;
+}
+
+// here we change the "file button" (document icon) origin
+- (NSPoint)_fileButtonOrigin
+{
+    NSPoint point = [self _fileButtonOriginOriginal];
+    point.x += ([[self window] _documentEditingState] > 0)? kAdditionalFileButtonMarginX : kAdditionalFileButtonMarginXNotEdited;
+    return point;
 }
 
 // here we add an additional margin to the separator between the "edited" message and the window's title
