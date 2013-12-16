@@ -770,10 +770,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="KHQ-HN-dJG" customClass="GRProSliderCell"/>
                     </slider>
-                    <progressIndicator focusRingType="none" maxValue="100" style="bar" id="eYH-hv-BOk">
-                        <rect key="frame" x="12" y="6" width="161" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </progressIndicator>
                     <button focusRingType="none" id="Tap-Qj-3B0" customClass="GRProButton">
                         <rect key="frame" x="181" y="4" width="133" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -785,6 +781,10 @@
                             <action selector="startProgress:" target="494" id="VtO-Dl-TYD"/>
                         </connections>
                     </button>
+                    <customView id="gkp-ZZ-sBb" customClass="GRProProgressIndicator">
+                        <rect key="frame" x="10" y="6" width="163" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </customView>
                 </subviews>
             </view>
             <contentBorderThickness minY="32"/>
@@ -793,7 +793,7 @@
             <connections>
                 <outlet property="box" destination="f6q-Lq-yyN" id="dzW-Pb-ur4"/>
                 <outlet property="preferencesWindow" destination="aAC-2l-ugF" id="yxR-Nw-gxw"/>
-                <outlet property="progressBar" destination="eYH-hv-BOk" id="Wl0-qr-Llk"/>
+                <outlet property="progressBar" destination="gkp-ZZ-sBb" id="3w4-8E-vgJ"/>
                 <outlet property="runModalCheck" destination="kcs-O2-7Do" id="8wh-lt-WBx"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>

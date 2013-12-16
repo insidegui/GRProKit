@@ -19,6 +19,7 @@
 		DD7718271822AC7800482CBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD7718251822AC7800482CBE /* InfoPlist.strings */; };
 		DD7718581822B09E00482CBE /* GRProWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7718561822B09E00482CBE /* GRProWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD7718591822B09E00482CBE /* GRProWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7718571822B09E00482CBE /* GRProWindow.m */; };
+		DD782612185FA9D00041B71D /* GRProTheme.pack in Resources */ = {isa = PBXBuildFile; fileRef = DD782611185FA9CC0041B71D /* GRProTheme.pack */; };
 		DDBDA3601826B0F1006D744F /* GRThemePiece.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA3591826B0F1006D744F /* GRThemePiece.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDBDA3611826B0F1006D744F /* GRThemePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA35A1826B0F1006D744F /* GRThemePiece.m */; };
 		DDBDA3621826B0F1006D744F /* GRThemeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA35B1826B0F1006D744F /* GRThemeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +38,6 @@
 		DDBDA3931826F92D006D744F /* GRProProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA3911826F92D006D744F /* GRProProgressIndicator.m */; };
 		DDBDA396182705E0006D744F /* GRProToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA394182705E0006D744F /* GRProToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDBDA397182705E0006D744F /* GRProToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA395182705E0006D744F /* GRProToolbar.m */; };
-		DDBDA39918271C4C006D744F /* GRProTheme.pack in Resources */ = {isa = PBXBuildFile; fileRef = DDBDA39818271C4C006D744F /* GRProTheme.pack */; };
 		DDBDA39E1827231E006D744F /* GRProKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA39C1827231E006D744F /* GRProKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDBDA39F1827231E006D744F /* GRProKit.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA39D1827231E006D744F /* GRProKit.m */; };
 /* End PBXBuildFile section */
@@ -62,6 +62,7 @@
 		DD7718311822AC7800482CBE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DD7718561822B09E00482CBE /* GRProWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProWindow.h; sourceTree = "<group>"; };
 		DD7718571822B09E00482CBE /* GRProWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProWindow.m; sourceTree = "<group>"; };
+		DD782611185FA9CC0041B71D /* GRProTheme.pack */ = {isa = PBXFileReference; lastKnownFileType = file; path = GRProTheme.pack; sourceTree = "<group>"; };
 		DDBDA3591826B0F1006D744F /* GRThemePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRThemePiece.h; sourceTree = "<group>"; };
 		DDBDA35A1826B0F1006D744F /* GRThemePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRThemePiece.m; sourceTree = "<group>"; };
 		DDBDA35B1826B0F1006D744F /* GRThemeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRThemeStore.h; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		DDBDA3911826F92D006D744F /* GRProProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProProgressIndicator.m; sourceTree = "<group>"; };
 		DDBDA394182705E0006D744F /* GRProToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProToolbar.h; sourceTree = "<group>"; };
 		DDBDA395182705E0006D744F /* GRProToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProToolbar.m; sourceTree = "<group>"; };
-		DDBDA39818271C4C006D744F /* GRProTheme.pack */ = {isa = PBXFileReference; lastKnownFileType = file; path = GRProTheme.pack; sourceTree = "<group>"; };
 		DDBDA39C1827231E006D744F /* GRProKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProKit.h; sourceTree = "<group>"; };
 		DDBDA39D1827231E006D744F /* GRProKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,7 +102,7 @@
 		DD5A2B961825AEC100332C2F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DDBDA39818271C4C006D744F /* GRProTheme.pack */,
+				DD782611185FA9CC0041B71D /* GRProTheme.pack */,
 				DDBDA3761826C7D8006D744F /* GRProAlert.xib */,
 			);
 			name = Resources;
@@ -277,9 +277,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDBDA39918271C4C006D744F /* GRProTheme.pack in Resources */,
 				DD7718271822AC7800482CBE /* InfoPlist.strings in Resources */,
 				DDBDA3771826C7D8006D744F /* GRProAlert.xib in Resources */,
+				DD782612185FA9D00041B71D /* GRProTheme.pack in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
