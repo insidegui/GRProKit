@@ -16,6 +16,7 @@
 #import "GRProButton.h"
 #import "GRProAlert.h"
 #import "GRProProgressIndicator.h"
+#import "GRProTableView.h"
 
 @interface GRProKit : NSObject
 

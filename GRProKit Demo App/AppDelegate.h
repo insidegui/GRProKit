@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <GRProKit/GRProKit.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource>
 
 @property (assign) IBOutlet GRProWindow *window;
 @property (weak) IBOutlet GRProBox *box;
@@ -18,5 +18,6 @@
 @property (weak) IBOutlet GRProButton *runModalCheck;
 @property (weak) IBOutlet GRProProgressIndicator *progressBar;
 @property (unsafe_unretained) IBOutlet GRProWindow *preferencesWindow;
+@property (weak) IBOutlet GRProTableView *tableView;
 
 @end

@@ -28,13 +28,7 @@
 
 - (void)updateLabelLook
 {
-    [self setWantsLayer:YES];
-    
-    NSShadow *labelShadow = [[NSShadow alloc] init];
-    labelShadow.shadowBlurRadius = 0;
-    labelShadow.shadowColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.4];
-    labelShadow.shadowOffset = NSMakeSize(0, 1);
-    [self setShadow:labelShadow];
+    [self setShadow:[GRProLabel proFontShadow]];
     
     [self setBordered:NO];
     [self setDrawsBackground:NO];
@@ -42,6 +36,16 @@
     
     NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:@"Helvetica" size:13.0];
     [self setFont:[NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:13.0]];
+}
+
++ (NSShadow *)proFontShadow
+{
+    NSShadow *proShadow = [[NSShadow alloc] init];
+    proShadow.shadowBlurRadius = 0;
+    proShadow.shadowColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.4];
+    proShadow.shadowOffset = NSMakeSize(0, 1);
+    
+    return proShadow;
 }
 
 @end

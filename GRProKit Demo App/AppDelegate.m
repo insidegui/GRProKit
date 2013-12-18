@@ -12,11 +12,37 @@
 {
     double currentProgress;
     NSTimer *_progressTimer;
+    NSArray *_people;
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    _people = @[
+                @{@"name": @"John Appleseed", @"email" : @"johnappleseed@apple.com"},
+                @{@"name": @"Steve Jobs", @"email" : @"sjobs@apple.com"},
+                @{@"name": @"Phil Schiller", @"email" : @"pschiller@apple.com"},
+                @{@"name": @"Jonathan Ive", @"email" : @"ive@apple.com"},
+                @{@"name": @"Joe Bloggs", @"email" : @"joe@apple.com"}
+                ];
+    [self.tableView setDataSource:self];
+    [self.tableView reloadData];
+    
     self.box.title = @"Hello, Pro World!";
 }
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return _people.count;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    if ([tableView.identifier isEqualToString:@"name"]) {
+        return _people[row][@"name"];
+    } else {
+        return _people[row][@"email"];
+    }
+}
+
 - (IBAction)proButtonClicked:(id)sender {
     self.alert = [[GRProAlert alloc] init];
     

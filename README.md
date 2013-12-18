@@ -37,6 +37,11 @@ NSTextField subclass, basically a label with the Helvetica font and a subtle sha
 NSButton and NSButtonCell subclasses for Push Button, Pop Up Button, Checkbox and Radio Button
 The cell class must be set in interface builder (see demo app)
 
+## GRProTableView
+
+NSTableView subclass with custom look, NSTableHeaderCell's drawing methods are overwritten and a custom NSTextFieldCell needs to be set in the xib file.
+Support for view based table views coming soon.
+
 ## How the images are stored
 
 To manage the theme's images I've created a file format which encapsulates all the images used by the custom controls,
@@ -52,3 +57,4 @@ the source code of this utility will be released soon
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_1.png)
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_2.png)
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_3.png)
+![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_4.png)

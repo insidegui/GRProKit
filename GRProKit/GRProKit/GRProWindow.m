@@ -45,6 +45,7 @@
 
 // window title color - key window
 #define kProWindowTitleTextColorActive [NSColor blackColor]
+#define kProWindowTexturedTitleTextColor [NSColor colorWithCalibratedRed:0.75f green:0.75f blue:0.75f alpha:1.0f]
 // window title color - not key window
 #define kProWindowTitleTextColor [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
 
@@ -185,7 +186,11 @@ float toolbarHeightForWindow(NSWindow *window);
 - (void)didBecomeKey:(NSNotification *)notification
 {
     // here we update our label's text color when the window becomes active
-    [_titleLabel setTextColor:kProWindowTitleTextColorActive];
+    if (self.styleMask & NSTexturedBackgroundWindowMask) {
+        [_titleLabel setTextColor:kProWindowTexturedTitleTextColor];
+    } else {
+        [_titleLabel setTextColor:kProWindowTitleTextColorActive];
+    }
 }
 
 - (void)didResignKey:(NSNotification *)notification
@@ -507,22 +512,25 @@ float toolbarHeightForWindow(NSWindow *window);
         // not key window
         titleGrad = [[NSGradient alloc] initWithStartingColor:kProWindowTitleGradientTop endingColor:kProWindowTitleGradientBottom];
     }
-    // draw gradient
-    [titleGrad drawInRect:NSMakeRect(0, NSHeight(self.frame)-titlebarHeight, NSWidth(self.frame), titlebarHeight) angle:-90];
     
-    // draw gradient separator
-    NSRect separatorRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight-1, NSWidth(self.frame), 1);
-    [kProWindowTitleSeparatorColor setFill];
-    NSRectFill(separatorRect);
-    
-    // draw titlebar highlight
-    NSRect highlightRect = NSMakeRect(0, NSHeight(self.frame)-1, NSWidth(self.frame), 1);
-    if ([self.window isKeyWindow]) {
-        [kProWindowTitleBarHighlightColorActive setFill];
-    } else {
-        [kProWindowTitleBarHighlightColor setFill];
+    if (!(self.window.styleMask & NSTexturedBackgroundWindowMask)) {
+        // draw gradient
+        [titleGrad drawInRect:NSMakeRect(0, NSHeight(self.frame)-titlebarHeight, NSWidth(self.frame), titlebarHeight) angle:-90];
+        
+        // draw gradient separator
+        NSRect separatorRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight-1, NSWidth(self.frame), 1);
+        [kProWindowTitleSeparatorColor setFill];
+        NSRectFill(separatorRect);
+        
+        // draw titlebar highlight
+        NSRect highlightRect = NSMakeRect(0, NSHeight(self.frame)-1, NSWidth(self.frame), 1);
+        if ([self.window isKeyWindow]) {
+            [kProWindowTitleBarHighlightColorActive setFill];
+        } else {
+            [kProWindowTitleBarHighlightColor setFill];
+        }
+        NSRectFill(highlightRect);
     }
-    NSRectFill(highlightRect);
     
     // the following code will draw the window's footer, if needed
     CGFloat windowContentBorderHeight = [self.window contentBorderThicknessForEdge:NSMinYEdge];

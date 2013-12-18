@@ -10,4 +10,6 @@
 
 @interface GRProLabel : NSTextField
 
++ (NSShadow *)proFontShadow;
+
 @end
