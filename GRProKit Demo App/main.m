@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <GRProKit/GRProKit.h>
 
 int main(int argc, const char * argv[])
 {
-    return NSApplicationMain(argc, argv);
+    return GRProApplicationMain(argc, argv);
 }

@@ -18,6 +18,11 @@
 #import "GRProProgressIndicator.h"
 #import "GRProTableView.h"
 
+int GRProApplicationMain(int argc, const char **argv);
+
 @interface GRProKit : NSObject
 
++ (void)install;
+
 @end
+

@@ -8,6 +8,18 @@
 
 #import "GRProKit.h"
 
+int GRProApplicationMain(int argc, const char **argv)
+{
+    [GRProKit install];
+    
+    return NSApplicationMain(argc, argv);
+}
+
 @implementation GRProKit
+
++ (void)install
+{
+    [[NSUserDefaults standardUserDefaults] setVolatileDomain:@{@"AppleAquaColorVariant": @6} forName:NSArgumentDomain];
+}
 
 @end
