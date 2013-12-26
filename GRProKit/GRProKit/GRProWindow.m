@@ -403,7 +403,7 @@ float toolbarHeightForWindow(NSWindow *window);
 // pass event to traffic lights
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    [super mouseEntered:theEvent];
+    [super mouseExited:theEvent];
     
     if (![self isWidgetEvent:theEvent]) return;
     
