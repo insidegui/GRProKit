@@ -22,6 +22,11 @@
 		DD7718271822AC7800482CBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD7718251822AC7800482CBE /* InfoPlist.strings */; };
 		DD7718581822B09E00482CBE /* GRProWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7718561822B09E00482CBE /* GRProWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD7718591822B09E00482CBE /* GRProWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7718571822B09E00482CBE /* GRProWindow.m */; };
+		DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7EC7AC186BBD4900AA527C /* GRProMenu.h */; };
+		DD7EC7AF186BBD4900AA527C /* GRProMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7EC7AD186BBD4900AA527C /* GRProMenu.m */; };
+		DD7EC7B1186BBDA000AA527C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7EC7B0186BBDA000AA527C /* Carbon.framework */; };
+		DD7EC7B4186BC09F00AA527C /* GRProFont.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7EC7B2186BC09F00AA527C /* GRProFont.h */; };
+		DD7EC7B5186BC09F00AA527C /* GRProFont.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7EC7B3186BC09F00AA527C /* GRProFont.m */; };
 		DDBDA3601826B0F1006D744F /* GRThemePiece.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA3591826B0F1006D744F /* GRThemePiece.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDBDA3611826B0F1006D744F /* GRThemePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA35A1826B0F1006D744F /* GRThemePiece.m */; };
 		DDBDA3621826B0F1006D744F /* GRThemeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA35B1826B0F1006D744F /* GRThemeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +72,11 @@
 		DD7718311822AC7800482CBE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DD7718561822B09E00482CBE /* GRProWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProWindow.h; sourceTree = "<group>"; };
 		DD7718571822B09E00482CBE /* GRProWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProWindow.m; sourceTree = "<group>"; };
+		DD7EC7AC186BBD4900AA527C /* GRProMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProMenu.h; sourceTree = "<group>"; };
+		DD7EC7AD186BBD4900AA527C /* GRProMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProMenu.m; sourceTree = "<group>"; };
+		DD7EC7B0186BBDA000AA527C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		DD7EC7B2186BC09F00AA527C /* GRProFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProFont.h; sourceTree = "<group>"; };
+		DD7EC7B3186BC09F00AA527C /* GRProFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProFont.m; sourceTree = "<group>"; };
 		DDBDA3591826B0F1006D744F /* GRThemePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRThemePiece.h; sourceTree = "<group>"; };
 		DDBDA35A1826B0F1006D744F /* GRThemePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRThemePiece.m; sourceTree = "<group>"; };
 		DDBDA35B1826B0F1006D744F /* GRThemeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRThemeStore.h; sourceTree = "<group>"; };
@@ -94,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7EC7B1186BBDA000AA527C /* Carbon.framework in Frameworks */,
 				DDBDA3791826CE90006D744F /* QuartzCore.framework in Frameworks */,
 				DDBDA3681826B0FB006D744F /* libz.dylib in Frameworks */,
 				DD77181D1822AC7800482CBE /* Cocoa.framework in Frameworks */,
@@ -132,6 +143,7 @@
 		DD77181B1822AC7800482CBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD7EC7B0186BBDA000AA527C /* Carbon.framework */,
 				DDBDA3781826CE90006D744F /* QuartzCore.framework */,
 				DDBDA3671826B0FB006D744F /* libz.dylib */,
 				DD77181C1822AC7800482CBE /* Cocoa.framework */,
@@ -179,6 +191,10 @@
 				DDBDA395182705E0006D744F /* GRProToolbar.m */,
 				DDBDA39C1827231E006D744F /* GRProKit.h */,
 				DDBDA39D1827231E006D744F /* GRProKit.m */,
+				DD7EC7AC186BBD4900AA527C /* GRProMenu.h */,
+				DD7EC7AD186BBD4900AA527C /* GRProMenu.m */,
+				DD7EC7B2186BC09F00AA527C /* GRProFont.h */,
+				DD7EC7B3186BC09F00AA527C /* GRProFont.m */,
 			);
 			path = GRProKit;
 			sourceTree = "<group>";
@@ -214,6 +230,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */,
 				DD5A2C021825E1B100332C2F /* GRProBox.h in Headers */,
 				DDBDA3661826B0F1006D744F /* ThemeFile.h in Headers */,
 				DDBDA3921826F92D006D744F /* GRProProgressIndicator.h in Headers */,
@@ -226,6 +243,7 @@
 				DD5187E8186101CC008C10CD /* GRProTableView.h in Headers */,
 				DDBDA3621826B0F1006D744F /* GRThemeStore.h in Headers */,
 				DDBDA3641826B0F1006D744F /* NSData+ZLib.h in Headers */,
+				DD7EC7B4186BC09F00AA527C /* GRProFont.h in Headers */,
 				DD5A2C061825E7B900332C2F /* GRProSplitView.h in Headers */,
 				DD5A2BFA1825DEBF00332C2F /* GRProLabel.h in Headers */,
 				DD7718581822B09E00482CBE /* GRProWindow.h in Headers */,
@@ -299,10 +317,12 @@
 			files = (
 				DD5A2C071825E7B900332C2F /* GRProSplitView.m in Sources */,
 				DDBDA3741826C552006D744F /* GRProAlert.m in Sources */,
+				DD7EC7AF186BBD4900AA527C /* GRProMenu.m in Sources */,
 				DDBDA397182705E0006D744F /* GRProToolbar.m in Sources */,
 				DDBDA3631826B0F1006D744F /* GRThemeStore.m in Sources */,
 				DD7718591822B09E00482CBE /* GRProWindow.m in Sources */,
 				DD5A2BFB1825DEBF00332C2F /* GRProLabel.m in Sources */,
+				DD7EC7B5186BC09F00AA527C /* GRProFont.m in Sources */,
 				DDBDA3611826B0F1006D744F /* GRThemePiece.m in Sources */,
 				DDBDA3931826F92D006D744F /* GRProProgressIndicator.m in Sources */,
 				DD5A2C0B1825E99400332C2F /* GRProButton.m in Sources */,

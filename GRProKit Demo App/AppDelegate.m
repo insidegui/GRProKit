@@ -83,5 +83,9 @@
 }
 - (IBAction)otherItem:(id)sender {
 }
+- (IBAction)submenuItemAction:(id)sender {
+}
+- (IBAction)anotherSubitemAction:(id)sender {
+}
 
 @end

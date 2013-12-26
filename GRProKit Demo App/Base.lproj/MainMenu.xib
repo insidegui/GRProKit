@@ -736,14 +736,34 @@
                                     <popUpButton verticalHuggingPriority="750" id="Lyd-2S-Aac">
                                         <rect key="frame" x="18" y="172" width="204" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Pro Pop Up Button " bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bVM-98-65r" id="t4Q-KE-wPc" customClass="GRProPopUpButtonCell">
+                                        <popUpButtonCell key="cell" type="push" title="Menu With Submenu" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VXV-3k-mGC" id="t4Q-KE-wPc" customClass="GRProPopUpButtonCell">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="YQx-6z-3mX">
                                                 <items>
-                                                    <menuItem title="Pro Pop Up Button " state="on" id="bVM-98-65r"/>
-                                                    <menuItem title="Item 2" id="VXV-3k-mGC"/>
-                                                    <menuItem title="Item 3" id="bVL-bw-tiT"/>
+                                                    <menuItem title="Pro Pop Up Button " id="bVM-98-65r"/>
+                                                    <menuItem title="Menu With Submenu" state="on" id="VXV-3k-mGC">
+                                                        <menu key="submenu" title="Menu With Submenu" id="16f-na-HVd">
+                                                            <items>
+                                                                <menuItem title="SubMenu Item" id="vbZ-d2-PUS">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                    <connections>
+                                                                        <action selector="submenuItemAction:" target="494" id="eXf-Wk-hba"/>
+                                                                    </connections>
+                                                                </menuItem>
+                                                                <menuItem title="Another SubItem" id="OJY-rp-OE4">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                    <connections>
+                                                                        <action selector="anotherSubitemAction:" target="494" id="EeM-Rf-UKG"/>
+                                                                    </connections>
+                                                                </menuItem>
+                                                                <menuItem title="This is cool" id="cWP-6j-AyI">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                </menuItem>
+                                                            </items>
+                                                        </menu>
+                                                    </menuItem>
+                                                    <menuItem title="The last guy" id="bVL-bw-tiT"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
@@ -898,7 +918,7 @@
                             <rect key="frame" x="0.0" y="183" width="777" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" horizontal="NO" id="NOb-R8-jBP">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="NOb-R8-jBP">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>

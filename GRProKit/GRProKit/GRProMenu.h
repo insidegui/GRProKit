@@ -10,4 +10,6 @@
 
 @interface GRProMenu : NSObject
 
++ (void)installGRProMenuImpl:(NSMenu *)menu;
+
 @end
