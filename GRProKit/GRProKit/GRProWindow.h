@@ -40,6 +40,7 @@ typedef enum {
 - (NSAttributedString *)_currentTitleTextFieldAttributedString;
 - (NSButton *)autosaveButton;
 - (NSTextField *)_autosaveButtonSeparatorField;
+- (NSRect)_titlebarTitleRect;
 @end
 
 // window theme frame: container class we use to swizzle some drawing methods to draw a custom window frame

@@ -423,7 +423,15 @@ float toolbarHeightForWindow(NSWindow *window);
     }
 }
 
-// reset traffic lights
+// modify title rect to accommodate bigger font size
+- (NSRect)_titlebarTitleRect
+{
+    NSRect titleRect = [super _titlebarTitleRect];
+    titleRect.size.width += 10.0;
+    titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
+    
+    return titleRect;
+}
 
 - (NSTextFieldCell *)_customTitleCell
 {
@@ -437,14 +445,14 @@ float toolbarHeightForWindow(NSWindow *window);
     
     NSColor *titleColor = (self.window.isKeyWindow) ? kProWindowTitleColor : kProWindowTitleColorNoKey;
     
-    NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proLabelFont], NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
+    NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proTitleFont], NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
     cell.attributedStringValue = [[NSAttributedString alloc] initWithString:self.window.title attributes:attributes];
     
     // also update our "edited" label's attributes
     if ([[self autosaveButton] title]) [[self autosaveButton] setAttributedTitle:[[NSAttributedString alloc] initWithString:[[self autosaveButton] title] attributes:attributes]];
     
     // update the "--" label
-    [[self _autosaveButtonSeparatorField] setFont:[GRProFont proLabelFont]];
+    [[self _autosaveButtonSeparatorField] setFont:[GRProFont proTitleFont]];
     [[self _autosaveButtonSeparatorField] setTextColor:titleColor];
     [[self _autosaveButtonSeparatorField] setShadow:titleShadow];
     
@@ -467,7 +475,7 @@ float toolbarHeightForWindow(NSWindow *window)
     
     if(toolbar && [toolbar isVisible]) {
         windowFrame = [NSWindow contentRectForFrameRect:[window frame] styleMask:[window styleMask]];
-        toolbarHeight = NSHeight(windowFrame) - NSHeight([[window contentView] frame]);
+        toolbarHeight = NSHeight(windowFrame) - NSHeight([[window contentView] frame]) - 1;
     }
     
     return toolbarHeight;

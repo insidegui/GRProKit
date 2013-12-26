@@ -25,10 +25,21 @@
 
 + (BOOL)CTFontIsDefaultProFont:(CTFontRef)font
 {
+
     NSRect bbox = CTFontGetBoundingBox(font);
     NSRect pbbox = [self preferredFontBoundingBox];
     
     return  bbox.size.width == pbbox.size.width && bbox.size.height == pbbox.size.height;
+}
+
++ (NSFontDescriptor *)proFontDescriptorWithSize:(CGFloat)size
+{
+    NSFont *testFont;
+    NSFontDescriptor *outputDescriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:size];
+    testFont = [NSFont fontWithDescriptor:outputDescriptor size:size];
+    if(!testFont) outputDescriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFallbackFontName] size:size];
+    
+    return outputDescriptor;
 }
 
 + (CGFloat)menuFontSize
@@ -43,14 +54,29 @@
 
 + (NSFont *)proLabelFont
 {
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:kGRProKitDefaultFontSize];
+    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
     return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize];
 }
 
 + (NSFont *)proControlFont
 {
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:kGRProKitDefaultFontSize-1];
+    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
     return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize-1];
+}
+
++ (NSFont *)proTitleFont
+{
+    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
+    return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize+1];
+}
+
++ (CGFloat)windowTitleHeightOffsetForFont:(NSFont *)font
+{
+    if ([[font fontName] isEqualToString:[NSString stringWithUTF8String:kGRProKitFontName]]) {
+        return kGRProKitDefaultFontTitleHeightOffset;
+    } else {
+        return kGRProKitFallbackFontTitleHeightOffset;
+    }
 }
 
 @end

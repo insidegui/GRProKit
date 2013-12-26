@@ -8,11 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define kGRProKitFontName "HelveticaNeue"
-#define kGRProKitFallbackFontName "Helvetica"
+// default font for controls, labels, etc
+#define kGRProKitFontName "Helvetica"
+// fallback font if default font is not available
+#define kGRProKitFallbackFontName "LucidaGrande"
+// default font size for labels
 #define kGRProKitDefaultFontSize 13.0
 
-#define kGRProKitPreferredFontBoundingBox NSMakeRect(-13.314, -6.734039306640625, 33.558, 21.811981201171875)
+// this is used to identify the default font's availability when using CoreText
+#define kGRProKitPreferredFontBoundingBox NSMakeRect(-13.3095703125, -6.7333984375, 33.55078125, 22.435546875)
+
+// offset for window's titles according to the font being used
+#define kGRProKitDefaultFontTitleHeightOffset 0.0
+#define kGRProKitFallbackFontTitleHeightOffset 0.0
 
 @interface GRProFont : NSFont
 
@@ -20,5 +28,7 @@
 + (CGFloat)menuFontSize;
 + (NSFont *)proLabelFont;
 + (NSFont *)proControlFont;
++ (NSFont *)proTitleFont;
++ (CGFloat)windowTitleHeightOffsetForFont:(NSFont *)font;
 
 @end
