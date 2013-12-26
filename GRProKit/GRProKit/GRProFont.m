@@ -38,23 +38,18 @@
 
 + (NSFont *)systemFontOfSize:(CGFloat)fontSize
 {
-    return [NSFont fontWithName:[self proFontName] size:kGRProKitDefaultFontSize];
-}
-
-+ (NSString *)proFontName
-{
-    return [NSString stringWithUTF8String:kGRProKitFontName];
+    return [NSFont fontWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:kGRProKitDefaultFontSize];
 }
 
 + (NSFont *)proLabelFont
 {
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[self proFontName] size:kGRProKitDefaultFontSize];
+    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:kGRProKitDefaultFontSize];
     return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize];
 }
 
 + (NSFont *)proControlFont
 {
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[self proFontName] size:kGRProKitDefaultFontSize-1];
+    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:[NSString stringWithUTF8String:kGRProKitFontName] size:kGRProKitDefaultFontSize-1];
     return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize-1];
 }
 
