@@ -73,13 +73,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
     
-    //    [self layoutTitleLabel];
-    
     [self layoutTrafficLights];
-    
-    // listen to notifications when the window changes it's key status
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKey:) name:NSWindowDidBecomeKeyNotification object:self];
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKey:) name:NSWindowDidResignKeyNotification object:self];
     
     return self;
 }
@@ -160,55 +154,7 @@ float toolbarHeightForWindow(NSWindow *window);
     }
 }
 
-// setup window's title label
-//- (void)layoutTitleLabel
-//{
-//    // calculate correct title frame and initialize the label
-//    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(0, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
-//
-//    // if for some reason our title is not available, we don't want to crash :)
-//    NSString *title = (self.title) ? self.title : @"";
-//    [_titleLabel setStringValue:title];
-//
-//    [_titleLabel setAlignment:NSCenterTextAlignment];
-//    [_titleLabel setAutoresizingMask:NSViewWidthSizable|NSViewMinYMargin];
-//
-//    [[self.contentView superview] addSubview:_titleLabel];
-//}
-//
-//- (void)setTitle:(NSString *)aString
-//{
-//    [super setTitle:aString];
-//
-//    // we need to update our custom title label when the window's  title changes
-//    [_titleLabel setStringValue:aString];
-//}
-
-//- (void)didBecomeKey:(NSNotification *)notification
-//{
-//    // here we update our label's text color when the window becomes active
-//    if (self.styleMask & NSTexturedBackgroundWindowMask) {
-//        [_titleLabel setTextColor:kProWindowTexturedTitleTextColor];
-//    } else {
-//        [_titleLabel setTextColor:kProWindowTitleTextColorActive];
-//    }
-//}
-//
-//- (void)didResignKey:(NSNotification *)notification
-//{
-//    // here we update our label's text color when the window becomes inactive
-//    [_titleLabel setTextColor:kProWindowTitleTextColor];
-//}
-
 @end
-
-// window widget's notification names
-#define kGRProThemeWidgetGroupActiveNotification @"GRProThemeWidgetGroupActiveNotification"
-#define kGRProThemeWidgetGroupInactiveNotification @"GRProThemeWidgetGroupInactiveNotification"
-
-/*
- I decided to use notifications to keep the three buttons in sync, I've found this to be the easiest way (at least that I know of)
- */
 
 @implementation GRProThemeWidget
 {
@@ -237,19 +183,6 @@ float toolbarHeightForWindow(NSWindow *window);
             [self.window zoom:self];
             break;
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kGRProThemeWidgetGroupInactiveNotification object:self];
-}
-
-// this is called when the mouse exits any of the window wigets
-- (void)themeWidgetGroupInactive:(NSNotification *)notification
-{
-    // we ignore the notification if we are the sender or if the notification is not from a widget in the same window
-    if ([notification.object isEqualTo:self] || ![[notification.object window] isEqual:self.window]) return;
-    
-    // update the button to be in it's inactive state
-    
-    [self setNeedsDisplay];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
