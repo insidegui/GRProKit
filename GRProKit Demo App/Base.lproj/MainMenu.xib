@@ -670,10 +670,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="777" height="249"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <button focusRingType="none" id="ogD-UR-Nee" customClass="GRProButton">
+                                    <button id="ogD-UR-Nee" customClass="GRProButton">
                                         <rect key="frame" x="20" y="4" width="133" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <buttonCell key="cell" type="square" title="Show Pro Alert" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="s98-7N-1AJ" customClass="GRProButtonCell">
+                                        <buttonCell key="cell" type="square" title="Show Pro Alert" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="s98-7N-1AJ" customClass="GRProButtonCell">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -791,10 +791,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="KHQ-HN-dJG" customClass="GRProSliderCell"/>
                     </slider>
-                    <button focusRingType="none" id="Tap-Qj-3B0" customClass="GRProButton">
+                    <button id="Tap-Qj-3B0" customClass="GRProButton">
                         <rect key="frame" x="181" y="4" width="133" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="square" title="Start Progress" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1VM-tB-9Rh" customClass="GRProButtonCell">
+                        <buttonCell key="cell" type="square" title="Start Progress" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1VM-tB-9Rh" customClass="GRProButtonCell">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>

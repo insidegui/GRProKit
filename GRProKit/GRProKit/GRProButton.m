@@ -155,11 +155,6 @@
 
 @implementation GRProCheckboxCell
 
-- (void)drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-    
-}
-
 - (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView
 {
     NSString *imageBasename = @"checkbox";
@@ -187,12 +182,6 @@
     NSRect finalRect = NSMakeRect(frame.origin.x, frame.origin.y-1, NSWidth(frame), NSHeight(frame));
     
     [theImage drawInRect:finalRect fromRect:NSMakeRect(0, 0, theImage.size.width-1, theImage.size.height) operation:NSCompositeSourceOver fraction:fraction respectFlipped:YES hints:nil];
-    
-    // draw focus
-    if ([[self.controlView.window firstResponder] isEqual:self.controlView]) {
-        NSImage *focusImage = [[GRThemeStore proThemeStore] imageNamed:@"checkbox_focus"];
-        [focusImage drawInRect:finalRect fromRect:NSMakeRect(0, 0, focusImage.size.width, focusImage.size.height) operation:NSCompositePlusLighter fraction:1.0 respectFlipped:YES hints:nil];
-    }
 }
 
 - (NSRect)drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView
@@ -265,10 +254,6 @@
 
 @implementation GRProPopUpButtonCell
 
-- (void)drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-}
-
 - (NSRect)drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView
 {
     NSMutableParagraphStyle *pstyle = [[NSMutableParagraphStyle alloc] init];
@@ -327,14 +312,6 @@
     
     // draw the images
     NSDrawThreePartImage(frame, startCap, centerFill, endCap, NO, NSCompositeSourceOver, 1.0, YES);
-    
-//    // draw focus
-//    if ([[self.controlView.window firstResponder] isEqual:self.controlView]) {
-//        NSImage *focusStartCap = [[GRThemeStore proThemeStore] imageNamed:@"popup_focus_startCap"];
-//        NSImage *focusCenterFill = [[GRThemeStore proThemeStore] imageNamed:@"popup_focus_centerFill"];
-//        NSImage *focusEndCap = [[GRThemeStore proThemeStore] imageNamed:@"popup_focus_endCap"];
-//        NSDrawThreePartImage(frame, focusStartCap, focusCenterFill, focusEndCap, NO, NSCompositePlusLighter, 0.5, YES);
-//    }
 }
 
 
