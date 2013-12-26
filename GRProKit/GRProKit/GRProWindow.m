@@ -7,8 +7,8 @@
 //
 
 #import "GRProWindow.h"
+#import "GRProFont.h"
 #import "GRProLabel.h"
-
 #import <objc/runtime.h>
 
 // the following constants define the look and layout for the window, have fun messing around with them :)
@@ -33,6 +33,11 @@
 // titlebar top highlight color - not key window
 #define kProWindowTitleBarHighlightColor [NSColor colorWithCalibratedWhite:0.435 alpha:1.000]
 
+#define kProWindowTitleColor [NSColor colorWithCalibratedWhite:0.038 alpha:1.000]
+#define kProWindowTitleColorNoKey [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
+#define kProWindowTitleShadowColor [NSColor colorWithCalibratedWhite:0.5 alpha:1.000]
+#define kProWindowTitleShadowColorNoKey [NSColor colorWithCalibratedWhite:0.5 alpha:0]
+
 // window footer gradient - key window
 #define kProWindowBottomGradientTopActive [NSColor colorWithCalibratedWhite:0.341 alpha:1.000]
 #define kProWindowBottomGradientBottomActive [NSColor colorWithCalibratedWhite:0.257 alpha:1.000]
@@ -43,20 +48,6 @@
 #define kProWindowBottomHighlightColor [NSColor colorWithCalibratedWhite:0.427 alpha:1.000]
 #define kProWindowBottomShadowletColor [NSColor colorWithCalibratedWhite:0.225 alpha:1.000]
 
-// window title color - key window
-#define kProWindowTitleTextColorActive [NSColor blackColor]
-#define kProWindowTexturedTitleTextColor [NSColor colorWithCalibratedRed:0.75f green:0.75f blue:0.75f alpha:1.0f]
-// window title color - not key window
-#define kProWindowTitleTextColor [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
-
-// left margin for autosave button
-#define kAdditionalAutosaveButtonMarginX 26.0
-#define kAdditionalAutosaveButtonMarginY 1.0
-// the left margin for autosave button when the document is not edited
-#define kAdditionalAutosaveButtonMarginXNotEdited 5.0
-// left margin for file button (document icon)
-#define kAdditionalFileButtonMarginXNotEdited -8.0
-#define kAdditionalFileButtonMarginX 21.0
 
 float toolbarHeightForWindow(NSWindow *window);
 
@@ -82,15 +73,25 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
     
-    [self layoutTitleLabel];
+    //    [self layoutTitleLabel];
     
     [self layoutTrafficLights];
     
     // listen to notifications when the window changes it's key status
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKey:) name:NSWindowDidBecomeKeyNotification object:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKey:) name:NSWindowDidResignKeyNotification object:self];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKey:) name:NSWindowDidBecomeKeyNotification object:self];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKey:) name:NSWindowDidResignKeyNotification object:self];
     
     return self;
+}
+
+- (BOOL)_usesCustomDrawing
+{
+    return NO;
+}
+
++ (Class)frameViewClassForStyleMask:(NSUInteger)styleMask
+{
+    return [GRProThemeFrame class];
 }
 
 // traffic light margin from the top of the window
@@ -160,44 +161,44 @@ float toolbarHeightForWindow(NSWindow *window);
 }
 
 // setup window's title label
-- (void)layoutTitleLabel
-{
-    // calculate correct title frame and initialize the label
-    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(0, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
-    
-    // if for some reason our title is not available, we don't want to crash :)
-    NSString *title = (self.title) ? self.title : @"";
-    [_titleLabel setStringValue:title];
-    
-    [_titleLabel setAlignment:NSCenterTextAlignment];
-    [_titleLabel setAutoresizingMask:NSViewWidthSizable|NSViewMinYMargin];
-    
-    [[self.contentView superview] addSubview:_titleLabel];
-}
+//- (void)layoutTitleLabel
+//{
+//    // calculate correct title frame and initialize the label
+//    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(0, NSHeight(self.frame)-23, NSWidth(self.frame), 22)];
+//
+//    // if for some reason our title is not available, we don't want to crash :)
+//    NSString *title = (self.title) ? self.title : @"";
+//    [_titleLabel setStringValue:title];
+//
+//    [_titleLabel setAlignment:NSCenterTextAlignment];
+//    [_titleLabel setAutoresizingMask:NSViewWidthSizable|NSViewMinYMargin];
+//
+//    [[self.contentView superview] addSubview:_titleLabel];
+//}
+//
+//- (void)setTitle:(NSString *)aString
+//{
+//    [super setTitle:aString];
+//
+//    // we need to update our custom title label when the window's  title changes
+//    [_titleLabel setStringValue:aString];
+//}
 
-- (void)setTitle:(NSString *)aString
-{
-    [super setTitle:aString];
-    
-    // we need to update our custom title label when the window's  title changes
-    [_titleLabel setStringValue:aString];
-}
-
-- (void)didBecomeKey:(NSNotification *)notification
-{
-    // here we update our label's text color when the window becomes active
-    if (self.styleMask & NSTexturedBackgroundWindowMask) {
-        [_titleLabel setTextColor:kProWindowTexturedTitleTextColor];
-    } else {
-        [_titleLabel setTextColor:kProWindowTitleTextColorActive];
-    }
-}
-
-- (void)didResignKey:(NSNotification *)notification
-{
-    // here we update our label's text color when the window becomes inactive
-    [_titleLabel setTextColor:kProWindowTitleTextColor];
-}
+//- (void)didBecomeKey:(NSNotification *)notification
+//{
+//    // here we update our label's text color when the window becomes active
+//    if (self.styleMask & NSTexturedBackgroundWindowMask) {
+//        [_titleLabel setTextColor:kProWindowTexturedTitleTextColor];
+//    } else {
+//        [_titleLabel setTextColor:kProWindowTitleTextColorActive];
+//    }
+//}
+//
+//- (void)didResignKey:(NSNotification *)notification
+//{
+//    // here we update our label's text color when the window becomes inactive
+//    [_titleLabel setTextColor:kProWindowTitleTextColor];
+//}
 
 @end
 
@@ -211,8 +212,7 @@ float toolbarHeightForWindow(NSWindow *window);
 
 @implementation GRProThemeWidget
 {
-    NSTrackingArea *_trackingArea;
-    BOOL _active;
+    BOOL _hover;
 }
 
 - (id)initWithFrame:(NSRect)frameRect
@@ -220,9 +220,6 @@ float toolbarHeightForWindow(NSWindow *window);
     self = [super initWithFrame:frameRect];
     
     if (!self) return nil;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeWidgetGroupActive:) name:kGRProThemeWidgetGroupActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeWidgetGroupInactive:) name:kGRProThemeWidgetGroupInactiveNotification object:nil];
     
     return self;
 }
@@ -240,7 +237,7 @@ float toolbarHeightForWindow(NSWindow *window);
             [self.window zoom:self];
             break;
     }
-    _active = NO;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kGRProThemeWidgetGroupInactiveNotification object:self];
 }
 
@@ -251,47 +248,21 @@ float toolbarHeightForWindow(NSWindow *window);
     if ([notification.object isEqualTo:self] || ![[notification.object window] isEqual:self.window]) return;
     
     // update the button to be in it's inactive state
-    _active = NO;
-    [self setNeedsDisplay];
-}
-
-// this is called when the mouse enters any of the window wigets
-- (void)themeWidgetGroupActive:(NSNotification *)notification
-{
-    // we ignore the notification if we are the sender or if the notification is not from a widget in the same window
-    if ([notification.object isEqualTo:self] || ![[notification.object window] isEqual:self.window]) return;
     
-    // update the button to be in it's active state
-    _active = YES;
     [self setNeedsDisplay];
-}
-
-// here we setup a tracking area to track when the mouse enters or exits the button, the tracking area is active even if our window is not the key window and our app is inactive
-- (void)updateTrackingAreas
-{
-    if (_trackingArea) [self removeTrackingArea:_trackingArea];
-    
-    _trackingArea = [[NSTrackingArea alloc] initWithRect:self.frame options:NSTrackingActiveAlways|NSTrackingInVisibleRect|NSTrackingMouseEnteredAndExited owner:self userInfo:nil];
-    [self addTrackingArea:_trackingArea];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    // tell our friends we should all be active :)
-    [[NSNotificationCenter defaultCenter] postNotificationName:kGRProThemeWidgetGroupActiveNotification object:self];
-    
     // update ourselves to be active
-    _active = YES;
+    _hover = YES;
     [self setNeedsDisplay];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    // tell our friends we should all be inactive :)
-    [[NSNotificationCenter defaultCenter] postNotificationName:kGRProThemeWidgetGroupInactiveNotification object:self];
-    
     // update ourselves to be inactive
-    _active = NO;
+    _hover = NO;
     [self setNeedsDisplay];
 }
 
@@ -328,7 +299,7 @@ float toolbarHeightForWindow(NSWindow *window);
     if ([self.cell isHighlighted]) {
         // if we are pressed, we need to add a "highlighted" suffix to the image's name
         imageSuffix = @"highlighted";
-    } else if (_active) {
+    } else if (_hover) {
         // if we are active (mouse over), we need to add an "active" suffix to the image's name
         imageSuffix = @"active";
     }
@@ -337,7 +308,7 @@ float toolbarHeightForWindow(NSWindow *window);
     if(![imageSuffix isEqualToString:@""]) imageName = [imageBasename stringByAppendingFormat:@"_%@", imageSuffix];
     
     // if the our window is not the key window and we are not active, we draw the boring greyed out widget image
-    if ((![self.window isKeyWindow] && !_active) || !self.isEnabled) imageName = @"widget_nokey";
+    if ((![self.window isKeyWindow] && !_hover) || !self.isEnabled) imageName = @"widget_nokey";
     
     // get the correct image from the theme
     NSImage *image = [[GRThemeStore proThemeStore] imageNamed:imageName];
@@ -348,139 +319,10 @@ float toolbarHeightForWindow(NSWindow *window);
 
 @end
 
-// define the private methods we are going to use/override
-@interface NSWindow (Swizzles)
-- (long long)_documentEditingState;
-@end
-
-@interface NSView (Swizzles)
-- (void)drawRectOriginal:(NSRect)rect;
-- (BOOL)_mouseInGroup:(NSButton*)widget;
-- (void)updateTrackingAreas;
-- (NSPoint)_autosaveButtonOriginOriginal;
-- (NSPoint)_autosaveButtonOrigin;
-- (NSPoint)_autosaveButtonSeparatorFieldOriginOriginal;
-- (NSPoint)_autosaveButtonSeparatorFieldOrigin;
-- (NSPoint)_fileButtonOrigin;
-- (NSPoint)_fileButtonOriginOriginal;
-
-- (id)autosaveButton;
-- (id)_autosaveButtonSeparatorField;
-@end
-
 @implementation GRProThemeFrame
-
-// this is called when the class is loaded by the objective-c runtime, so it's a good place to do some method swizzling :D
-+ (void)load
-{
-    // get the original NSThemeFrame class (this is the class that's responsible for drawing the window frame)
-    Class grayFrameClass = NSClassFromString(@"NSThemeFrame");
-    
-    // the following code will change the original NSThemeFrame's drawRect: method's name to drawRectOriginal:
-    // and put our custom drawRect: method in it's place
-    
-    Method m0 = class_getInstanceMethod([self class], @selector(drawRect:));
-    
-    class_addMethod(grayFrameClass, @selector(drawRectOriginal:), method_getImplementation(m0), method_getTypeEncoding(m0));
-    
-    Method m1 = class_getInstanceMethod(grayFrameClass, @selector(drawRect:));
-    Method m2 = class_getInstanceMethod(grayFrameClass, @selector(drawRectOriginal:));
-    
-    method_exchangeImplementations(m1, m2);
-    
-    // the following code will change the original NSThemeFrame's _autosaveButtonOrigin method's name to _autosaveButtonOriginOriginal
-    // and put our custom _autosaveButtonOrigin method in it's place
-    
-    Method m3 = class_getInstanceMethod([self class], @selector(_autosaveButtonOrigin));
-    
-    class_addMethod(grayFrameClass, @selector(_autosaveButtonOriginOriginal), method_getImplementation(m3), method_getTypeEncoding(m3));
-    
-    Method m4 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonOriginOriginal));
-    Method m5 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonOrigin));
-    
-    method_exchangeImplementations(m4, m5);
-    
-    // the following code will change the original NSThemeFrame's _autosaveButtonSeparatorFieldOrigin method's name to _autosaveButtonSeparatorFieldOriginOriginal
-    // and put our custom _autosaveButtonSeparatorFieldOrigin method in it's place
-    
-    Method m6 = class_getInstanceMethod([self class], @selector(_autosaveButtonSeparatorFieldOrigin));
-    
-    class_addMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOriginOriginal), method_getImplementation(m6), method_getTypeEncoding(m6));
-    
-    Method m7 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOriginOriginal));
-    Method m8 = class_getInstanceMethod(grayFrameClass, @selector(_autosaveButtonSeparatorFieldOrigin));
-    
-    method_exchangeImplementations(m7, m8);
-    
-    // the following code will change the original NSThemeFrame's _fileButtonOrigin method's name to _fileButtonOriginOriginal
-    // and put our custom _fileButtonOrigin method in it's place
-    
-    Method m9 = class_getInstanceMethod([self class], @selector(_fileButtonOrigin));
-    
-    class_addMethod(grayFrameClass, @selector(_fileButtonOriginOriginal), method_getImplementation(m9), method_getTypeEncoding(m9));
-    
-    Method m10 = class_getInstanceMethod(grayFrameClass, @selector(_fileButtonOriginOriginal));
-    Method m11 = class_getInstanceMethod(grayFrameClass, @selector(_fileButtonOrigin));
-    
-    method_exchangeImplementations(m10, m11);
-}
-
-+ (NSMutableAttributedString *)proAttributedStringWithString:(NSString *)aString
-{
-    // set the correct font attributes with the "Pro" look
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:aString];
-    NSRange titleRange = NSMakeRange(0, [string length]);
-    [string addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.01 alpha:1.0] range:titleRange];
-    
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:@"Helvetica" size:13.0];
-    NSFont *titleFont = [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:13.0];
-    [string addAttribute:NSFontAttributeName value:titleFont range:titleRange];
-    
-    return string;
-}
-
-// here we change the "file button" (document icon) origin
-- (NSPoint)_fileButtonOrigin
-{
-    NSPoint point = [self _fileButtonOriginOriginal];
-    point.x += ([[self window] _documentEditingState] > 0)? kAdditionalFileButtonMarginX : kAdditionalFileButtonMarginXNotEdited;
-    return point;
-}
-
-// here we add an additional margin to the separator between the "edited" message and the window's title
-// we also use this method to customize the separator's look
-- (NSPoint)_autosaveButtonSeparatorFieldOrigin
-{
-    // apply our new attributed string as the button's attributedTitle
-    [[self _autosaveButtonSeparatorField] setFont:[NSFont fontWithName:@"Helvetica" size:13.0]];
-    [[self _autosaveButtonSeparatorField] setTextColor:[NSColor colorWithCalibratedWhite:0.01 alpha:1.0]];
-    
-    NSPoint point = [self _autosaveButtonSeparatorFieldOriginOriginal];
-    point.x += kAdditionalAutosaveButtonMarginX;
-    point.y += kAdditionalAutosaveButtonMarginY;
-    return point;
-}
-
-// here we add an additional margin to the left of the autosave button (the "edited" message and little arrow)
-// we also use this method to customize the "edited" label look
-- (NSPoint)_autosaveButtonOrigin
-{
-    [[self autosaveButton] setAttributedTitle:[GRProThemeFrame proAttributedStringWithString:[[self autosaveButton] title]]];
-    
-    NSPoint point = [self _autosaveButtonOriginOriginal];
-    point.x += ([[self window] _documentEditingState] > 0)? kAdditionalAutosaveButtonMarginX : kAdditionalAutosaveButtonMarginXNotEdited;
-    point.y += kAdditionalAutosaveButtonMarginY;
-    return point;
-}
 
 // NSThemeFrame's drawRect, here we draw our custom window goodness
 - (void)drawRect:(NSRect)rect {
-    // draw the original look
-    [self drawRectOriginal:rect];
-    
-    // if this theme frame is not for a GRProWindow, we don't do any custom drawing and keep the system default
-    if (![[self window] isKindOfClass:[GRProWindow class]]) return;
-    
     // clear the canvas
     [[NSColor clearColor] setFill];
     NSRectFill(rect);
@@ -532,6 +374,9 @@ float toolbarHeightForWindow(NSWindow *window);
         NSRectFill(highlightRect);
     }
     
+    // draw window's title
+    [super _drawTitleStringInClip:self.frame];
+    
     // the following code will draw the window's footer, if needed
     CGFloat windowContentBorderHeight = [self.window contentBorderThicknessForEdge:NSMinYEdge];
     if (windowContentBorderHeight == 0) return;
@@ -569,6 +414,32 @@ float toolbarHeightForWindow(NSWindow *window);
     NSRect fillerRect = NSMakeRect(0, windowContentBorderHeight, NSWidth(self.frame), NSHeight(self.frame)-kProWindowTitlebarHeight-windowContentBorderHeight-1);
     [kProWindowBackgroundColor setFill];
     NSRectFill(fillerRect);
+}
+
+- (NSTextFieldCell *)_customTitleCell
+{
+    NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:self.window.title];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSLeftTextAlignment;
+    NSShadow *titleShadow = [[NSShadow alloc] init];
+    titleShadow.shadowBlurRadius = 0;
+    titleShadow.shadowOffset = NSMakeSize(0, -1);
+    titleShadow.shadowColor = (self.window.isKeyWindow) ? kProWindowTitleShadowColor : kProWindowTitleShadowColorNoKey;
+    
+    NSColor *titleColor = (self.window.isKeyWindow) ? kProWindowTitleColor : kProWindowTitleColorNoKey;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proLabelFont], NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
+    cell.attributedStringValue = [[NSAttributedString alloc] initWithString:self.window.title attributes:attributes];
+    
+    // also update our "edited" label's attributes
+    if ([[self autosaveButton] title]) [[self autosaveButton] setAttributedTitle:[[NSAttributedString alloc] initWithString:[[self autosaveButton] title] attributes:attributes]];
+    
+    // update the "--" label
+    [[self _autosaveButtonSeparatorField] setFont:[GRProFont proLabelFont]];
+    [[self _autosaveButtonSeparatorField] setTextColor:titleColor];
+    [[self _autosaveButtonSeparatorField] setShadow:titleShadow];
+    
+    return cell;
 }
 
 @end

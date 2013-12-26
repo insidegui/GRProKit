@@ -33,7 +33,15 @@ typedef enum {
 
 @end
 
+// this is a private interface we're using
+@interface NSThemeFrame : NSView
+- (void)_drawTitleStringInClip:(NSRect)rect;
+- (NSAttributedString *)_currentTitleTextFieldAttributedString;
+- (NSButton *)autosaveButton;
+- (NSTextField *)_autosaveButtonSeparatorField;
+@end
+
 // window theme frame: container class we use to swizzle some drawing methods to draw a custom window frame
-@interface GRProThemeFrame : NSView
+@interface GRProThemeFrame : NSThemeFrame
 
 @end
