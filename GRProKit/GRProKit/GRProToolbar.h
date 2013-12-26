@@ -8,14 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+// currently this class doesn't override anything
 @interface GRProToolbar : NSToolbar
-
-@end
-
-@interface GRProToolbarItem : NSToolbarItem
-
-@end
-
-@interface GRProToolbarView : NSView
 
 @end

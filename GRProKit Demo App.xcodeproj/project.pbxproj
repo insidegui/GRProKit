@@ -16,6 +16,10 @@
 		DD7717F41822AC5D00482CBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7717F31822AC5D00482CBE /* Images.xcassets */; };
 		DD7718531822ACC000482CBE /* GRProKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD77184D1822AC7900482CBE /* GRProKit.framework */; };
 		DD7718541822AD0500482CBE /* GRProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD77184D1822AC7900482CBE /* GRProKit.framework */; };
+		DD882486186CDDE2002975DE /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = DD882483186CDDE2002975DE /* edit.png */; };
+		DD882487186CDDE2002975DE /* grab.png in Resources */ = {isa = PBXBuildFile; fileRef = DD882484186CDDE2002975DE /* grab.png */; };
+		DD882488186CDDE2002975DE /* xcode.png in Resources */ = {isa = PBXBuildFile; fileRef = DD882485186CDDE2002975DE /* xcode.png */; };
+		DD88248A186CDDFC002975DE /* ICONS.txt in Resources */ = {isa = PBXBuildFile; fileRef = DD882489186CDDFC002975DE /* ICONS.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		DD7717F31822AC5D00482CBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DD7717FA1822AC5D00482CBE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DD7718471822AC7800482CBE /* GRProKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRProKit.xcodeproj; path = GRProKit/GRProKit.xcodeproj; sourceTree = "<group>"; };
+		DD882483186CDDE2002975DE /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		DD882484186CDDE2002975DE /* grab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grab.png; sourceTree = "<group>"; };
+		DD882485186CDDE2002975DE /* xcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xcode.png; sourceTree = "<group>"; };
+		DD882489186CDDFC002975DE /* ICONS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ICONS.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 		DD7717E21822AC5D00482CBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DD882475186CBCB2002975DE /* Images */,
 				DD7717E31822AC5D00482CBE /* GRProKit Demo App-Info.plist */,
 				DD7717E41822AC5D00482CBE /* InfoPlist.strings */,
 				DD7717E71822AC5D00482CBE /* main.m */,
@@ -148,6 +157,17 @@
 				DD77184D1822AC7900482CBE /* GRProKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DD882475186CBCB2002975DE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DD882483186CDDE2002975DE /* edit.png */,
+				DD882484186CDDE2002975DE /* grab.png */,
+				DD882485186CDDE2002975DE /* xcode.png */,
+				DD882489186CDDFC002975DE /* ICONS.txt */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,9 +241,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD7717E61822AC5D00482CBE /* InfoPlist.strings in Resources */,
+				DD882488186CDDE2002975DE /* xcode.png in Resources */,
+				DD882486186CDDE2002975DE /* edit.png in Resources */,
+				DD88248A186CDDFC002975DE /* ICONS.txt in Resources */,
 				DD7717F41822AC5D00482CBE /* Images.xcassets in Resources */,
 				DD7717EC1822AC5D00482CBE /* Credits.rtf in Resources */,
 				DD7717F21822AC5D00482CBE /* MainMenu.xib in Resources */,
+				DD882487186CDDE2002975DE /* grab.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +372,6 @@
 		DD77180A1822AC5D00482CBE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -363,7 +386,6 @@
 		DD77180B1822AC5D00482CBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

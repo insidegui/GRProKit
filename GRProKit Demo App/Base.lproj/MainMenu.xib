@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
+        <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
@@ -821,8 +821,8 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <window title="Pro Window with toolbar" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="aAC-2l-ugF" customClass="GRProWindow">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+        <window title="Pro Window with toolbar" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="aAC-2l-ugF" customClass="GRProWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="207" width="480" height="270"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
@@ -830,21 +830,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="12BD006E-EC84-4C84-8DA2-C8419450FF14" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="Aha-aP-fEr" customClass="GRProToolbar">
+            <toolbar key="toolbar" implicitIdentifier="12BD006E-EC84-4C84-8DA2-C8419450FF14" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="Aha-aP-fEr" customClass="GRProToolbar">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ja6-rI-yVI"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="DLW-4J-XjW"/>
-                    <toolbarItem implicitItemIdentifier="C0D2CC06-CF53-4DA1-9129-90A1724E0452" label="Pro Item" paletteLabel="Pro Item" tag="-1" image="NSUser" id="N2k-Qe-KAm" customClass="GRProToolbarItem">
+                    <toolbarItem implicitItemIdentifier="C0D2CC06-CF53-4DA1-9129-90A1724E0452" label="Edit" paletteLabel="Edit" tag="-1" image="edit" selectable="YES" id="N2k-Qe-KAm">
                         <connections>
                             <action selector="proItem:" target="494" id="IGO-QK-RV8"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="ACD9906E-7B9E-4D3C-B995-613EF46DB6B1" label="Other Item" paletteLabel="Other Item" tag="-1" image="NSNetwork" id="ZRw-FO-RQu" customClass="GRProToolbarItem">
+                    <toolbarItem implicitItemIdentifier="ACD9906E-7B9E-4D3C-B995-613EF46DB6B1" label="Grab" paletteLabel="Grab" tag="-1" image="grab" selectable="YES" id="ZRw-FO-RQu">
                         <connections>
                             <action selector="otherItem:" target="494" id="Bki-kY-nwf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="D9DC1187-F5DD-4497-BA09-BDB0CA721797" label="Computer Item" paletteLabel="Computer Item" tag="-1" image="NSComputer" id="ANZ-Gy-K3o">
+                    <toolbarItem implicitItemIdentifier="D9DC1187-F5DD-4497-BA09-BDB0CA721797" label="Xcode" paletteLabel="Xcode" tag="-1" image="xcode" selectable="YES" id="ANZ-Gy-K3o">
                         <connections>
                             <action selector="proItem:" target="494" id="ajs-0K-Zku"/>
                         </connections>
@@ -861,7 +861,7 @@
                 </defaultToolbarItems>
             </toolbar>
         </window>
-        <window title="Table View" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="oC4-ge-yEq" customClass="GRProWindow">
+        <window title="Table View" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="oC4-ge-yEq" customClass="GRProWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="207" width="480" height="270"/>
@@ -949,8 +949,8 @@
         </menu>
     </objects>
     <resources>
-        <image name="NSComputer" width="32" height="32"/>
-        <image name="NSNetwork" width="32" height="32"/>
-        <image name="NSUser" width="32" height="32"/>
+        <image name="edit" width="128" height="128"/>
+        <image name="grab" width="128" height="128"/>
+        <image name="xcode" width="128" height="128"/>
     </resources>
 </document>

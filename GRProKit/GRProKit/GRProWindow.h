@@ -12,6 +12,43 @@
 
 #import <Cocoa/Cocoa.h>
 
+// the following constants define the look and layout for the window, have fun messing around with them :)
+
+// the height for the title bar
+// changing this will not really work because we are assuming the titlebar will have the standard window titlebar size
+#define kProWindowTitlebarHeight 22
+
+// window background color
+#define kProWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.151 alpha:1.000]
+
+// titlebar gradient colors - key window
+#define kProWindowTitleGradientTopActive [NSColor colorWithCalibratedWhite:0.459 alpha:1.000]
+#define kProWindowTitleGradientBottomActive [NSColor colorWithCalibratedWhite:0.330 alpha:1.000]
+// titlebar gradient colors - not key window
+#define kProWindowTitleGradientTop [NSColor colorWithCalibratedWhite:0.300 alpha:1.000]
+#define kProWindowTitleGradientBottom [NSColor colorWithCalibratedWhite:0.215 alpha:1.000]
+// titlebar bottom separator color
+#define kProWindowTitleSeparatorColor [NSColor blackColor]
+// titlebar top highlight color - key window
+#define kProWindowTitleBarHighlightColorActive [NSColor colorWithCalibratedWhite:0.647 alpha:1.000]
+// titlebar top highlight color - not key window
+#define kProWindowTitleBarHighlightColor [NSColor colorWithCalibratedWhite:0.435 alpha:1.000]
+
+#define kProWindowTitleColor [NSColor colorWithCalibratedWhite:0.038 alpha:1.000]
+#define kProWindowTitleColorNoKey [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
+#define kProWindowTitleShadowColor [NSColor colorWithCalibratedWhite:0.5 alpha:1.000]
+#define kProWindowTitleShadowColorNoKey [NSColor colorWithCalibratedWhite:0.5 alpha:0]
+
+// window footer gradient - key window
+#define kProWindowBottomGradientTopActive [NSColor colorWithCalibratedWhite:0.341 alpha:1.000]
+#define kProWindowBottomGradientBottomActive [NSColor colorWithCalibratedWhite:0.257 alpha:1.000]
+// window footer gradient - not key window
+#define kProWindowBottomGradientTop [NSColor colorWithCalibratedWhite:0.260 alpha:1.000]
+#define kProWindowBottomGradientBottom [NSColor colorWithCalibratedWhite:0.219 alpha:1.000]
+// window footer highlight and shadowlet colors
+#define kProWindowBottomHighlightColor [NSColor colorWithCalibratedWhite:0.427 alpha:1.000]
+#define kProWindowBottomShadowletColor [NSColor colorWithCalibratedWhite:0.225 alpha:1.000]
+
 // window widget types
 typedef enum {
     GRProThemeWidgetTypeClose = 1,

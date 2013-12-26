@@ -7,55 +7,75 @@
 //
 
 #import "GRProToolbar.h"
-#import <objc/runtime.h>
+#import "GRProWindow.h"
+#import "GRProLabel.h"
+#import "GRProFont.h"
 
 @implementation GRProToolbar
 
 @end
 
-@implementation GRProToolbarItem
+@interface NSToolbarItemViewer : NSView
+@end
+
+@interface NSToolbarItemViewer (GRProKitOverrides)
 
 @end
 
-// define the methods we are going to override
-@interface NSView (Private)
-- (void)drawRectOriginal:(NSRect)rect;
-@end
+// we use a category to override NSToolbarItemViewer,
+// this is the view responsible for drawing the toolbar item,
+// we need to change the look of selected items
+@implementation NSToolbarItemViewer (GRProKitOverrides)
 
-static BOOL _updatedToolbarLabels = NO;
-
-@implementation GRProToolbarView
-
-+ (void)load
+- (void)drawSelectionIndicatorInRect:(NSRect)rect
 {
-    // get the original NSToolbarView class (this is the class that's responsible for drawing the toolbar background)
-    Class grayFrameClass = NSClassFromString(@"NSToolbarView");
+    // background gradient
+    NSColor *bgGrad0 = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.3];
+    NSColor *bgGrad1 = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
+    NSGradient *selectionIndicatorGrad = [[NSGradient alloc] initWithColorsAndLocations:bgGrad1, 0.0, bgGrad0, 0.53, bgGrad1, 1.0, nil];
     
-    // the following code will change the original NSToolbarView's drawRect: method's name to drawRectOriginal:
-    // and put our custom drawRect: method in it's place
+    // draw background gradient
+    NSBezierPath *rectanglePath = [NSBezierPath bezierPathWithRect:rect];
+    [selectionIndicatorGrad drawInBezierPath:rectanglePath angle:-90];
     
-    Method m0 = class_getInstanceMethod([self class], @selector(drawRect:));
+    // draw left and right borders
+    NSRect leftBorderRect = NSMakeRect(0, 0, 1.0, NSHeight(rect));
+    [selectionIndicatorGrad drawInRect:leftBorderRect angle:-90];
     
-    class_addMethod(grayFrameClass, @selector(drawRectOriginal:), method_getImplementation(m0), method_getTypeEncoding(m0));
-    
-    Method m1 = class_getInstanceMethod(grayFrameClass, @selector(drawRect:));
-    Method m2 = class_getInstanceMethod(grayFrameClass, @selector(drawRectOriginal:));
-    
-    method_exchangeImplementations(m1, m2);
+    NSRect rightBorderRect = NSMakeRect(NSWidth(rect)-1.0, 0, 1.0, NSHeight(rect));
+    [selectionIndicatorGrad drawInRect:rightBorderRect angle:-90];
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+@end
+
+@interface _NSToolbarItemViewerLabelCellPopUpCell : NSPopUpButtonCell
+@end
+
+// we use a category to override the toolbar's label cell drawing
+@interface _NSToolbarItemViewerLabelCellPopUpCell (GRProKitOverrides)
+
+@end
+
+@implementation _NSToolbarItemViewerLabelCellPopUpCell (GRProKitOverrides)
+
+// draw toolbar's label title
+- (void)drawWithFrame:(NSRect)frame inView:(NSView *)view;
 {
-    if (_updatedToolbarLabels) return;
+    if(![self title]) return;
+
+    NSShadow *titleShadow = [[NSShadow alloc] init];
+    titleShadow.shadowBlurRadius = 0;
+    titleShadow.shadowOffset = NSMakeSize(0, -1);
+    titleShadow.shadowColor = (view.window.isKeyWindow) ? kProWindowTitleShadowColor : kProWindowTitleShadowColorNoKey;
     
-    _updatedToolbarLabels = YES;
-    for (NSView *view in [self.subviews[0] subviews]) {
-        for (id itemView in [view subviews]) {
-            if ([itemView isKindOfClass:NSClassFromString(@"_NSToolbarItemViewerLabelView")]) {
-                [itemView setFont:[NSFont fontWithName:@"Helvetica" size:12.0]];
-            }
-        }
-    }
+    NSColor *titleColor = (view.window.isKeyWindow) ? kProWindowTitleColor : kProWindowTitleColorNoKey;
+
+    NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proToolbarFont], NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
+    
+    NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[self title] attributes:attributes];
+
+    CGFloat centerX = frame.size.width/2-titleString.size.width/2;
+    [titleString drawAtPoint:NSMakePoint(centerX, 0)];
 }
 
 @end

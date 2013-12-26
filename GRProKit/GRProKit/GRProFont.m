@@ -64,6 +64,12 @@
     return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize-1];
 }
 
++ (NSFont *)proToolbarFont
+{
+    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize-1];
+    return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize-2];
+}
+
 + (NSFont *)proTitleFont
 {
     NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];

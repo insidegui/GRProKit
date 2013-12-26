@@ -11,44 +11,6 @@
 #import "GRProLabel.h"
 #import <objc/runtime.h>
 
-// the following constants define the look and layout for the window, have fun messing around with them :)
-
-// the height for the title bar
-// changing this will not really work because we are assuming the titlebar will have the standard window titlebar size
-#define kProWindowTitlebarHeight 22
-
-// window background color
-#define kProWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.151 alpha:1.000]
-
-// titlebar gradient colors - key window
-#define kProWindowTitleGradientTopActive [NSColor colorWithCalibratedWhite:0.459 alpha:1.000]
-#define kProWindowTitleGradientBottomActive [NSColor colorWithCalibratedWhite:0.330 alpha:1.000]
-// titlebar gradient colors - not key window
-#define kProWindowTitleGradientTop [NSColor colorWithCalibratedWhite:0.300 alpha:1.000]
-#define kProWindowTitleGradientBottom [NSColor colorWithCalibratedWhite:0.215 alpha:1.000]
-// titlebar bottom separator color
-#define kProWindowTitleSeparatorColor [NSColor blackColor]
-// titlebar top highlight color - key window
-#define kProWindowTitleBarHighlightColorActive [NSColor colorWithCalibratedWhite:0.647 alpha:1.000]
-// titlebar top highlight color - not key window
-#define kProWindowTitleBarHighlightColor [NSColor colorWithCalibratedWhite:0.435 alpha:1.000]
-
-#define kProWindowTitleColor [NSColor colorWithCalibratedWhite:0.038 alpha:1.000]
-#define kProWindowTitleColorNoKey [NSColor colorWithCalibratedWhite:0.141 alpha:1.000]
-#define kProWindowTitleShadowColor [NSColor colorWithCalibratedWhite:0.5 alpha:1.000]
-#define kProWindowTitleShadowColorNoKey [NSColor colorWithCalibratedWhite:0.5 alpha:0]
-
-// window footer gradient - key window
-#define kProWindowBottomGradientTopActive [NSColor colorWithCalibratedWhite:0.341 alpha:1.000]
-#define kProWindowBottomGradientBottomActive [NSColor colorWithCalibratedWhite:0.257 alpha:1.000]
-// window footer gradient - not key window
-#define kProWindowBottomGradientTop [NSColor colorWithCalibratedWhite:0.260 alpha:1.000]
-#define kProWindowBottomGradientBottom [NSColor colorWithCalibratedWhite:0.219 alpha:1.000]
-// window footer highlight and shadowlet colors
-#define kProWindowBottomHighlightColor [NSColor colorWithCalibratedWhite:0.427 alpha:1.000]
-#define kProWindowBottomShadowletColor [NSColor colorWithCalibratedWhite:0.225 alpha:1.000]
-
-
 float toolbarHeightForWindow(NSWindow *window);
 
 @implementation GRProWindow
@@ -182,7 +144,7 @@ float toolbarHeightForWindow(NSWindow *window);
             [self.window zoom:self];
             break;
     }
-
+    
     [(GRProThemeFrame *)self.superview resetWidgets];
 }
 
@@ -392,7 +354,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [super mouseEntered:theEvent];
     
     if (![self isWidgetEvent:theEvent]) return;
-
+    
     for (id widget in self.subviews) {
         if ([widget isKindOfClass:[GRProThemeWidget class]]) {
             [widget mouseEntered:theEvent];
@@ -427,7 +389,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (NSRect)_titlebarTitleRect
 {
     NSRect titleRect = [super _titlebarTitleRect];
-    titleRect.size.width += 10.0;
+    //    titleRect.size.width += 10.0;
     titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
     
     return titleRect;
@@ -449,7 +411,15 @@ float toolbarHeightForWindow(NSWindow *window);
     cell.attributedStringValue = [[NSAttributedString alloc] initWithString:self.window.title attributes:attributes];
     
     // also update our "edited" label's attributes
-    if ([[self autosaveButton] title]) [[self autosaveButton] setAttributedTitle:[[NSAttributedString alloc] initWithString:[[self autosaveButton] title] attributes:attributes]];
+    if ([[self autosaveButton] title]) {
+        [[self autosaveButton] setAttributedTitle:[[NSAttributedString alloc] initWithString:[[self autosaveButton] title] attributes:attributes]];
+        NSRect autosaveRect = [[self autosaveButton] frame];
+        NSRect titleRect = [self _titlebarTitleRect];
+        autosaveRect.size.height = titleRect.size.height;
+        autosaveRect.origin.y = titleRect.origin.y-1;
+        [[self autosaveButton] setFrame:autosaveRect];
+    }
+    
     
     // update the "--" label
     [[self _autosaveButtonSeparatorField] setFont:[GRProFont proTitleFont]];

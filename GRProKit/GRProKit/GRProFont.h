@@ -29,6 +29,7 @@
 + (NSFont *)proLabelFont;
 + (NSFont *)proControlFont;
 + (NSFont *)proTitleFont;
++ (NSFont *)proToolbarFont;
 + (CGFloat)windowTitleHeightOffsetForFont:(NSFont *)font;
 
 @end
