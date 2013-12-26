@@ -211,7 +211,7 @@
     shadow.shadowOffset = NSMakeSize(0, -1);
     
     // configure font attributes (font name and size, color, paragraph style and shadow)
-    NSDictionary *fontAttributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica" size:12],
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [GRProFont proLabelFont],
                                      NSForegroundColorAttributeName: textColor,
                                      NSParagraphStyleAttributeName: pstyle,
                                      NSShadowAttributeName: shadow};
@@ -291,14 +291,14 @@
     }
     
     // configure font attributes (font name and size, color, paragraph style and shadow)
-    NSDictionary *fontAttributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica" size:12],
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [GRProFont proLabelFont],
                                      NSForegroundColorAttributeName: textColor,
                                      NSParagraphStyleAttributeName: pstyle,
                                      NSShadowAttributeName: shadow};
     
     // create a new attributed string with our custom attributes and the original text
     NSAttributedString *modifiedTitle = [[NSAttributedString alloc] initWithString:title.string attributes:fontAttributes];
-    
+    frame.origin.y -= 1;
     return [super drawTitle:modifiedTitle withFrame:frame inView:controlView];
 }
 
