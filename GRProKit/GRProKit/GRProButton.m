@@ -8,6 +8,8 @@
 
 #import "GRProButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GRProFont.h"
+#import "GRProMenu.h"
 
 @interface GRProButtonOverlayView : NSView
 @end
@@ -109,7 +111,7 @@
     }
     
     // configure font attributes (font name and size, color, paragraph style and shadow)
-    NSDictionary *fontAttributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica" size:12],
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [GRProFont proLabelFont],
                                      NSForegroundColorAttributeName: textColor,
                                      NSParagraphStyleAttributeName: pstyle,
                                      NSShadowAttributeName: shadow};
@@ -333,6 +335,17 @@
 //        NSImage *focusEndCap = [[GRThemeStore proThemeStore] imageNamed:@"popup_focus_endCap"];
 //        NSDrawThreePartImage(frame, focusStartCap, focusCenterFill, focusEndCap, NO, NSCompositePlusLighter, 0.5, YES);
 //    }
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(!self) return nil;
+    
+    [GRProMenu installGRProMenuImpl:self.menu];
+    
+    return self;
 }
 
 @end

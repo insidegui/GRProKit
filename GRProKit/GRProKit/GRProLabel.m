@@ -7,6 +7,7 @@
 //
 
 #import "GRProLabel.h"
+#import "GRProFont.h"
 
 @implementation GRProLabel
 
@@ -34,8 +35,7 @@
     [self setDrawsBackground:NO];
     [self setEditable:NO];
     
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:@"Helvetica" size:13.0];
-    [self setFont:[NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:13.0]];
+    [self setFont:[GRProFont proLabelFont]];
 }
 
 + (NSShadow *)proFontShadow
