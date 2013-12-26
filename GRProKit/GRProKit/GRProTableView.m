@@ -9,6 +9,7 @@
 #import "GRProTableView.h"
 #import "GRThemeStore.h"
 #import "GRProLabel.h"
+#import "GRProFont.h"
 
 #define kProTableViewTextLeftMargin 12.0
 #define kProTableViewStandardRowHeight 22.0
@@ -53,7 +54,7 @@ void GRProKitDrawNoiseTexture(CGRect rect)
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-    NSDictionary *attributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica" size:13.0], NSForegroundColorAttributeName : [NSColor colorWithCalibratedRed:0.81f green:0.81f blue:0.81f alpha:1.0f], NSShadowAttributeName : [GRProTextFieldCell proTextFieldShadow], NSParagraphStyleAttributeName : [GRProTextFieldCell proParagraphStyle]};
+    NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proLabelFont], NSForegroundColorAttributeName : [NSColor colorWithCalibratedRed:0.81f green:0.81f blue:0.81f alpha:1.0f], NSShadowAttributeName : [GRProTextFieldCell proTextFieldShadow], NSParagraphStyleAttributeName : [GRProTextFieldCell proParagraphStyle]};
     [self.stringValue drawInRect:cellFrame withAttributes:attributes];
 }
 
@@ -121,8 +122,7 @@ void GRProKitDrawNoiseTexture(CGRect rect)
     
     NSColor *textColor;
     
-    NSFontDescriptor *descriptor = [NSFontDescriptor fontDescriptorWithName:@"Helvetica" size:13.0];
-    NSFont *font = [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:13.0];
+    NSFont *font = [GRProFont proLabelFont];
     
     NSRect finalTextRect = cellFrame;
     finalTextRect.size.width -= kProTableViewTextLeftMargin;
