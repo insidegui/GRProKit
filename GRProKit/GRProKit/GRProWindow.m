@@ -389,7 +389,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (NSRect)_titlebarTitleRect
 {
     NSRect titleRect = [super _titlebarTitleRect];
-    //    titleRect.size.width += 10.0;
+    titleRect.size.width += 1.0;
     titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
     
     return titleRect;
