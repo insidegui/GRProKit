@@ -357,20 +357,42 @@ float toolbarHeightForWindow(NSWindow *window);
     NSRectFill(fillerRect);
 }
 
+#define kProWindowWidgetsTrackingAreaUserInfo @{@"widgets": @1}
+
 // this is for the traffic lights
 - (void)updateTrackingAreas
 {
     for (NSTrackingArea *area in self.trackingAreas) {
-        [self removeTrackingArea:area];
+        if ([area.userInfo isEqualToDictionary:kProWindowWidgetsTrackingAreaUserInfo]) [self removeTrackingArea:area];
     }
     
-    _widgetTrackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8.0, NSHeight(self.frame)-6.0-15, 55.0, 15.0) options:NSTrackingActiveAlways|NSTrackingMouseEnteredAndExited|NSTrackingEnabledDuringMouseDrag owner:self userInfo:nil];
+    _widgetTrackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8.0, NSHeight(self.frame)-6.0-15, 55.0, 15.0) options:NSTrackingActiveAlways|NSTrackingMouseEnteredAndExited|NSTrackingEnabledDuringMouseDrag owner:self userInfo:kProWindowWidgetsTrackingAreaUserInfo];
     [self addTrackingArea:_widgetTrackingArea];
+    
+    [super updateTrackingAreas];
+}
+
+- (BOOL)isWidgetEvent:(NSEvent *)theEvent
+{
+    if(theEvent.userData) {
+        NSDictionary *userInfo = (NSDictionary *)theEvent.userData;
+        if ([userInfo isEqualToDictionary:kProWindowWidgetsTrackingAreaUserInfo]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
 }
 
 // pass event to traffic lights
 - (void)mouseEntered:(NSEvent *)theEvent
 {
+    [super mouseEntered:theEvent];
+    
+    if (![self isWidgetEvent:theEvent]) return;
+
     for (id widget in self.subviews) {
         if ([widget isKindOfClass:[GRProThemeWidget class]]) {
             [widget mouseEntered:theEvent];
@@ -381,6 +403,10 @@ float toolbarHeightForWindow(NSWindow *window);
 // pass event to traffic lights
 - (void)mouseExited:(NSEvent *)theEvent
 {
+    [super mouseEntered:theEvent];
+    
+    if (![self isWidgetEvent:theEvent]) return;
+    
     for (id widget in self.subviews) {
         if ([widget isKindOfClass:[GRProThemeWidget class]]) {
             [widget mouseExited:theEvent];
