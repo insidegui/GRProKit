@@ -30,6 +30,7 @@ typedef enum {
 @interface GRProThemeWidget : NSButton
 
 @property (nonatomic, assign) GRProThemeWidgetType type;
+@property (nonatomic, assign) BOOL hover;
 
 @end
 
@@ -43,5 +44,7 @@ typedef enum {
 
 // window theme frame: container class we use to swizzle some drawing methods to draw a custom window frame
 @interface GRProThemeFrame : NSThemeFrame
+
+- (void)resetWidgets;
 
 @end

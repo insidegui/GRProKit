@@ -91,14 +91,16 @@ float toolbarHeightForWindow(NSWindow *window);
 // traffic light margin from the top of the window
 #define kTrafficlightMargin 2.0
 // traffic light distance from the window left
-#define kTrafficlightDistanceFromWindow 3.0
+#define kTrafficlightDistanceFromWindow 6.0
 // size of the traffic light image (width and height are assumed to be equal)
 #define kTrafficLightSize 18.0
+// traffic light distance from another
+#define kTrafficLightPadding 3.0
 
 - (void)layoutTrafficLights
 {
     // calculate correct traffic light Y position
-    CGFloat buttonY = NSHeight(self.frame)-kTrafficLightSize-kTrafficlightMargin;
+    CGFloat buttonY = round(NSHeight(self.frame)-kTrafficLightSize-kTrafficlightMargin);
     
     // setup close button
     NSRect closeButtonRect = NSMakeRect(kTrafficlightDistanceFromWindow, buttonY, kTrafficLightSize, kTrafficLightSize);
@@ -111,7 +113,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self.contentView superview] addSubview:_closeButton];
     
     // setup miniaturize button
-    NSRect miniaturizeButtonRect = NSMakeRect(closeButtonRect.origin.x+kTrafficLightSize, buttonY, kTrafficLightSize, kTrafficLightSize);
+    NSRect miniaturizeButtonRect = NSMakeRect(closeButtonRect.origin.x+kTrafficLightSize+kTrafficLightPadding, buttonY, kTrafficLightSize, kTrafficLightSize);
     _miniaturizeButton = [[GRProThemeWidget alloc] initWithFrame:miniaturizeButtonRect];
     [_miniaturizeButton setType:GRProThemeWidgetTypeMiniaturize];
     [_miniaturizeButton setAutoresizingMask:NSViewMinYMargin|NSViewMaxXMargin];
@@ -121,7 +123,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self.contentView superview] addSubview:_miniaturizeButton];
     
     // setup zoom button
-    NSRect zoomButtonRect = NSMakeRect(miniaturizeButtonRect.origin.x+kTrafficLightSize, buttonY, kTrafficLightSize, kTrafficLightSize);
+    NSRect zoomButtonRect = NSMakeRect(miniaturizeButtonRect.origin.x+kTrafficLightSize+kTrafficLightPadding, buttonY, kTrafficLightSize, kTrafficLightSize);
     _zoomButton = [[GRProThemeWidget alloc] initWithFrame:zoomButtonRect];
     [_zoomButton setType:GRProThemeWidgetTypeZoom];
     [_zoomButton setAutoresizingMask:NSViewMinYMargin|NSViewMaxXMargin];
@@ -157,9 +159,6 @@ float toolbarHeightForWindow(NSWindow *window);
 @end
 
 @implementation GRProThemeWidget
-{
-    BOOL _hover;
-}
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -183,20 +182,26 @@ float toolbarHeightForWindow(NSWindow *window);
             [self.window zoom:self];
             break;
     }
+
+    [(GRProThemeFrame *)self.superview resetWidgets];
+}
+
+- (void)setHover:(BOOL)hover
+{
+    _hover = hover;
+    [self setNeedsDisplay];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
     // update ourselves to be active
-    _hover = YES;
-    [self setNeedsDisplay];
+    self.hover = YES;
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
     // update ourselves to be inactive
-    _hover = NO;
-    [self setNeedsDisplay];
+    self.hover = NO;
 }
 
 - (void)setType:(GRProThemeWidgetType)type
@@ -232,7 +237,7 @@ float toolbarHeightForWindow(NSWindow *window);
     if ([self.cell isHighlighted]) {
         // if we are pressed, we need to add a "highlighted" suffix to the image's name
         imageSuffix = @"highlighted";
-    } else if (_hover) {
+    } else if (self.hover) {
         // if we are active (mouse over), we need to add an "active" suffix to the image's name
         imageSuffix = @"active";
     }
@@ -241,7 +246,7 @@ float toolbarHeightForWindow(NSWindow *window);
     if(![imageSuffix isEqualToString:@""]) imageName = [imageBasename stringByAppendingFormat:@"_%@", imageSuffix];
     
     // if the our window is not the key window and we are not active, we draw the boring greyed out widget image
-    if ((![self.window isKeyWindow] && !_hover) || !self.isEnabled) imageName = @"widget_nokey";
+    if ((![self.window isKeyWindow] && !self.hover) || !self.isEnabled) imageName = @"widget_nokey";
     
     // get the correct image from the theme
     NSImage *image = [[GRThemeStore proThemeStore] imageNamed:imageName];
@@ -253,6 +258,9 @@ float toolbarHeightForWindow(NSWindow *window);
 @end
 
 @implementation GRProThemeFrame
+{
+    NSTrackingArea *_widgetTrackingArea;
+}
 
 // NSThemeFrame's drawRect, here we draw our custom window goodness
 - (void)drawRect:(NSRect)rect {
@@ -348,6 +356,48 @@ float toolbarHeightForWindow(NSWindow *window);
     [kProWindowBackgroundColor setFill];
     NSRectFill(fillerRect);
 }
+
+// this is for the traffic lights
+- (void)updateTrackingAreas
+{
+    for (NSTrackingArea *area in self.trackingAreas) {
+        [self removeTrackingArea:area];
+    }
+    
+    _widgetTrackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8.0, NSHeight(self.frame)-6.0-15, 55.0, 15.0) options:NSTrackingActiveAlways|NSTrackingMouseEnteredAndExited|NSTrackingEnabledDuringMouseDrag owner:self userInfo:nil];
+    [self addTrackingArea:_widgetTrackingArea];
+}
+
+// pass event to traffic lights
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    for (id widget in self.subviews) {
+        if ([widget isKindOfClass:[GRProThemeWidget class]]) {
+            [widget mouseEntered:theEvent];
+        }
+    }
+}
+
+// pass event to traffic lights
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    for (id widget in self.subviews) {
+        if ([widget isKindOfClass:[GRProThemeWidget class]]) {
+            [widget mouseExited:theEvent];
+        }
+    }
+}
+
+- (void)resetWidgets
+{
+    for (id widget in self.subviews) {
+        if ([widget isKindOfClass:[GRProThemeWidget class]]) {
+            [widget setHover:NO];
+        }
+    }
+}
+
+// reset traffic lights
 
 - (NSTextFieldCell *)_customTitleCell
 {
