@@ -87,5 +87,11 @@
 }
 - (IBAction)anotherSubitemAction:(id)sender {
 }
+- (IBAction)tableMenuItem1:(id)sender {
+    NSRunAlertPanel(@"Alert Panel", @"Standard Alert Panel :D", @"Ok", @"Cancel", nil);
+}
+- (IBAction)tableMenuItem2:(id)sender {
+    NSRunAlertPanel(@"Alert Panel 2", @"Standard Alert Panel Second Edition :D", @"Ok", @"Cancel", nil);
+}
 
 @end

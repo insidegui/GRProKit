@@ -737,13 +737,13 @@
                                     <popUpButton verticalHuggingPriority="750" id="Lyd-2S-Aac">
                                         <rect key="frame" x="18" y="172" width="204" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Menu With Submenu" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VXV-3k-mGC" id="t4Q-KE-wPc" customClass="GRProPopUpButtonCell">
+                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="t4Q-KE-wPc" customClass="GRProPopUpButtonCell">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
-                                            <menu key="menu" title="OtherViews" id="YQx-6z-3mX">
+                                            <menu key="menu" title="OtherViews" id="YQx-6z-3mX" customClass="GRProMenu">
                                                 <items>
                                                     <menuItem title="Pro Pop Up Button " id="bVM-98-65r"/>
-                                                    <menuItem title="Menu With Submenu" state="on" id="VXV-3k-mGC">
+                                                    <menuItem title="Menu With Submenu" id="VXV-3k-mGC">
                                                         <menu key="submenu" title="Menu With Submenu" id="16f-na-HVd">
                                                             <items>
                                                                 <menuItem title="SubMenu Item" id="vbZ-d2-PUS">
@@ -934,15 +934,21 @@
                 </subviews>
             </view>
         </window>
-        <menu id="4ib-Te-jr4">
+        <menu id="4ib-Te-jr4" customClass="GRProMenu">
             <items>
-                <menuItem title="Item 1" id="Gik-eD-nAF">
+                <menuItem title="This is a menu item" id="Gik-eD-nAF">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="tableMenuItem1:" target="494" id="kdD-CZ-ELb"/>
+                    </connections>
                 </menuItem>
-                <menuItem title="Item 2" id="SCv-4Y-RhC">
+                <menuItem title="Another item" id="SCv-4Y-RhC">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="tableMenuItem2:" target="494" id="DWg-jQ-IpD"/>
+                    </connections>
                 </menuItem>
-                <menuItem title="Item 3" id="tty-CX-2W3">
+                <menuItem title="Disabled item" id="tty-CX-2W3">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>

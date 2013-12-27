@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GRProMenu : NSObject
+@interface NSMenu (Dark)
+@property (readwrite, nonatomic, setter=setDark:) BOOL isDark;
+@end
+
+@interface GRProMenu : NSMenu
 
 + (void)installGRProMenuImpl:(NSMenu *)menu;
 
