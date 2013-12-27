@@ -10,6 +10,7 @@
 #import "GRThemeStore.h"
 #import "GRProLabel.h"
 #import "GRProFont.h"
+#import "GRProColor.h"
 
 #define kProTableViewTextLeftMargin 12.0
 #define kProTableViewStandardRowHeight 22.0
@@ -19,27 +20,17 @@
 + (NSParagraphStyle *)proParagraphStyle;
 @end
 
-void GRProKitDrawNoiseTexture(CGRect rect)
-{
-    [NSGraphicsContext saveGraphicsState];
-    NSBezierPath *noiseFillPath = [NSBezierPath bezierPathWithRect:rect];
-    [noiseFillPath addClip];
-    [[NSColor colorWithPatternImage:[[GRThemeStore proThemeStore] imageNamed:@"noise"]] setFill];
-    [noiseFillPath fill];
-    [NSGraphicsContext restoreGraphicsState];
-}
-
 @implementation NSTableHeaderCell (GRProKit)
 
 - (void)drawWithFrame:(CGRect)cellFrame highlighted:(BOOL)isHighlighted inView:(NSView *)view
 {
     CGRect fillRect, borderRect;
     CGRectDivide(cellFrame, &borderRect, &fillRect, 1.0, CGRectMaxYEdge);
-
+    
     NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.265 green:0.265 blue:0.272 alpha:1.000] endingColor:[NSColor colorWithCalibratedRed:0.185 green:0.185 blue:0.195 alpha:1.000]];
     [gradient drawInRect:fillRect angle:90.0];
     
-    GRProKitDrawNoiseTexture(fillRect);
+    [GRProColor drawNoiseTextureInRect:fillRect];
     
     [[NSColor colorWithCalibratedRed:0.115 green:0.114 blue:0.123 alpha:1.000] set];
     NSRectFill(borderRect);
@@ -112,7 +103,7 @@ void GRProKitDrawNoiseTexture(CGRect rect)
 - (void)initializeCustomLook
 {
     self.textColor = [NSColor colorWithCalibratedRed:0.84f green:0.84f blue:0.84f alpha:1.0f];
-        [self setTruncatesLastVisibleLine:YES];
+    [self setTruncatesLastVisibleLine:YES];
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -133,7 +124,7 @@ void GRProKitDrawNoiseTexture(CGRect rect)
     } else {
         textColor = [NSColor colorWithCalibratedRed:0.81f green:0.81f blue:0.81f alpha:1.0f];
     }
-
+    
     NSDictionary *attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName : textColor, NSShadowAttributeName : shadow, NSParagraphStyleAttributeName : [GRProTextFieldCell proParagraphStyle]};
     [self.stringValue drawInRect:finalTextRect withAttributes:attributes];
 }
@@ -148,7 +139,7 @@ void GRProKitDrawNoiseTexture(CGRect rect)
     if(!self) return nil;
     
     [self initializeCustomLook];
-
+    
     return self;
 }
 
@@ -206,14 +197,6 @@ void GRProKitDrawNoiseTexture(CGRect rect)
 {
     [self.backgroundColor setFill];
     NSRectFill(self.frame);
-    
-    NSGradient *backgroundLightGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.08] endingColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.0]];
-
-    NSPoint centerPoint = NSMakePoint(NSMidX(self.frame), NSMidY(self.frame));
-    CGFloat radius = MAX(NSHeight(self.frame), NSWidth(self.frame))/2;
-    [backgroundLightGradient drawFromCenter:centerPoint radius:0 toCenter:centerPoint radius:radius options:NSGradientDrawsAfterEndingLocation|NSGradientDrawsBeforeStartingLocation];
-    
-    GRProKitDrawNoiseTexture(self.frame);
 }
 
 @end

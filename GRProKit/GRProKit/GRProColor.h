@@ -10,6 +10,9 @@
 
 @interface GRProColor : NSColor
 
++ (void)drawNoiseTextureInRect:(NSRect)rect;
++ (void)drawBackgroundHighlightInRect:(NSRect)rect;
+
 @end
 
 // we use this category to override _focusRingCGColor, changing the default focus ring's color
