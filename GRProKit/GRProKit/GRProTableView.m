@@ -30,7 +30,9 @@
     NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.265 green:0.265 blue:0.272 alpha:1.000] endingColor:[NSColor colorWithCalibratedRed:0.185 green:0.185 blue:0.195 alpha:1.000]];
     [gradient drawInRect:fillRect angle:90.0];
     
+    [NSGraphicsContext saveGraphicsState];
     [GRProColor drawNoiseTextureInRect:fillRect];
+    [NSGraphicsContext restoreGraphicsState];
     
     [[NSColor colorWithCalibratedRed:0.115 green:0.114 blue:0.123 alpha:1.000] set];
     NSRectFill(borderRect);

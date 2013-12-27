@@ -8,6 +8,7 @@
 
 #import "GRProWindow.h"
 #import "GRProFont.h"
+#import "GRProColor.h"
 #import "GRProLabel.h"
 #import <objc/runtime.h>
 
@@ -36,6 +37,9 @@ float toolbarHeightForWindow(NSWindow *window);
     [[self standardWindowButton:NSWindowZoomButton] setHidden:YES];
     
     [self layoutTrafficLights];
+    
+    [self setOpaque:NO];
+    [self setBackgroundColor:[NSColor clearColor]];
     
     return self;
 }
@@ -224,30 +228,32 @@ float toolbarHeightForWindow(NSWindow *window);
     NSTrackingArea *_widgetTrackingArea;
 }
 
-// NSThemeFrame's drawRect, here we draw our custom window goodness
-- (void)drawRect:(NSRect)rect {
-    // clear the canvas
+- (NSBezierPath *)windowPath
+{
+    return [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
+}
+
+- (void)_drawTitleBarBackgroundInClipRect:(NSRect)rect
+{
     [[NSColor clearColor] setFill];
     NSRectFill(rect);
     
-    // create a clipping path, with the basic window shape
-    NSWindow* window = [self window];
-    NSRect windowRect = [window frame];
-    windowRect.origin = NSMakePoint(0, 0);
-    NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRoundedRect:windowRect xRadius:3 yRadius:3];
-    [roundedRect addClip];
-    [[NSBezierPath bezierPathWithRect:rect] addClip];
+    [NSGraphicsContext saveGraphicsState];
     
     CGFloat toolbarHeight = toolbarHeightForWindow(self.window);
     CGFloat titlebarHeight = toolbarHeight+kProWindowTitlebarHeight;
     
+    NSRect titleBarRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight, NSWidth(self.frame), titlebarHeight);
+    
+    [[self windowPath] addClip];
+
     // paint the background color
     [kProWindowBackgroundColor setFill];
     NSRectFill(rect);
-    
+
     // we don't draw anything else if this window is inside a sheet
     if([self.window isSheet]) return;
-    
+
     // draw the title gradient according to the window's current status
     NSGradient *titleGrad;
     if ([self.window isKeyWindow]) {
@@ -257,33 +263,61 @@ float toolbarHeightForWindow(NSWindow *window);
         // not key window
         titleGrad = [[NSGradient alloc] initWithStartingColor:kProWindowTitleGradientTop endingColor:kProWindowTitleGradientBottom];
     }
+
+    // draw gradient
+    [titleGrad drawInRect:titleBarRect angle:-90];
+
+    // draw titlebar highlight
+    NSRect highlightRect = NSMakeRect(0, NSHeight(self.frame)-1, NSWidth(self.frame), 1);
+    if ([self.window isKeyWindow]) {
+        [kProWindowTitleBarHighlightColorActive setFill];
+    } else {
+        [kProWindowTitleBarHighlightColor setFill];
+    }
+    NSRectFill(highlightRect);
     
-    if (!(self.window.styleMask & NSTexturedBackgroundWindowMask)) {
-        // draw gradient
-        [titleGrad drawInRect:NSMakeRect(0, NSHeight(self.frame)-titlebarHeight, NSWidth(self.frame), titlebarHeight) angle:-90];
+    // draw gradient separator
+    CGFloat separatorOffset = (self.window.toolbar) ? 1.0 : 0.0;
+    NSRect separatorRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight-separatorOffset, NSWidth(self.frame), 1);
+    [kProWindowTitleSeparatorColor setFill];
+    NSRectFill(separatorRect);
+    
+    [GRProColor drawNoiseTextureInRect:rect];
+    
+    [NSGraphicsContext restoreGraphicsState];
+}
+
+- (void)drawWindowBackgroundRect:(NSRect)rect
+{
+    [[NSColor clearColor] set];
+    NSRectFill(rect);
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    [[self windowPath] addClip];
+    
+    if(self.window.styleMask & NSTexturedBackgroundWindowMask) {
+        [self _drawTexturedThemeBackgroundRect:rect];
+    } else {
+        [kProWindowBackgroundColor setFill];
+        NSRectFill(rect);
         
-        // draw gradient separator
-        NSRect separatorRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight-1, NSWidth(self.frame), 1);
-        [kProWindowTitleSeparatorColor setFill];
-        NSRectFill(separatorRect);
-        
-        // draw titlebar highlight
-        NSRect highlightRect = NSMakeRect(0, NSHeight(self.frame)-1, NSWidth(self.frame), 1);
-        if ([self.window isKeyWindow]) {
-            [kProWindowTitleBarHighlightColorActive setFill];
-        } else {
-            [kProWindowTitleBarHighlightColor setFill];
-        }
-        NSRectFill(highlightRect);
+        [self drawContentBorder];
     }
     
-    // draw window's title
-    [super _drawTitleStringInClip:self.frame];
+    [NSGraphicsContext restoreGraphicsState];
+}
+
+- (void)drawContentBorder
+{
+    [NSGraphicsContext saveGraphicsState];
+    
+    [[self windowPath] addClip];
     
     // the following code will draw the window's footer, if needed
-    CGFloat windowContentBorderHeight = [self.window contentBorderThicknessForEdge:NSMinYEdge];
+    CGFloat windowContentBorderHeight = round([self.window contentBorderThicknessForEdge:NSMinYEdge]);
     if (windowContentBorderHeight == 0) return;
-    
+
     // footer gradient
     NSGradient *bottomGrad;
     if ([self.window isKeyWindow]) {
@@ -293,30 +327,58 @@ float toolbarHeightForWindow(NSWindow *window);
         // not key window
         bottomGrad = [[NSGradient alloc] initWithStartingColor:kProWindowBottomGradientTop endingColor:kProWindowBottomGradientBottom];
     }
-    
+
     // define a path for the footer
-    NSBezierPath *bottomPath = [NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, NSWidth(self.frame), windowContentBorderHeight+1)];
-    [bottomGrad drawInBezierPath:bottomPath angle:-90];
-    
+    NSRect bottomRect = NSMakeRect(0, -0.5, NSWidth(self.frame), windowContentBorderHeight+1);
+    [bottomGrad drawInRect:bottomRect angle:-90];
+
     // draw the separator between the window's content and footer
     NSRect bottomSeparatorRect = NSMakeRect(0, windowContentBorderHeight-1, NSWidth(self.frame), 1);
     [kProWindowTitleSeparatorColor setFill];
     NSRectFill(bottomSeparatorRect);
-    
+
     // draw footer highlight
     NSRect bottomHighlightRect = NSMakeRect(0, windowContentBorderHeight-2, NSWidth(self.frame), 1);
     [kProWindowBottomHighlightColor setFill];
     NSRectFill(bottomHighlightRect);
-    
+
     // draw footer shadowlet
-    NSRect bottomShadowLetRect = NSMakeRect(0, 0, NSWidth(self.frame), 1);
+    NSRect bottomShadowLetRect = NSMakeRect(0, -0.5, NSWidth(self.frame), 1.5);
     [kProWindowBottomShadowletColor setFill];
     NSRectFill(bottomShadowLetRect);
+    
+    [GRProColor drawNoiseTextureInRect:bottomRect];
+    
+    [NSGraphicsContext restoreGraphicsState];
     
     // re-fill the content area to avoid drawing glitches
     NSRect fillerRect = NSMakeRect(0, windowContentBorderHeight, NSWidth(self.frame), NSHeight(self.frame)-kProWindowTitlebarHeight-windowContentBorderHeight-1);
     [kProWindowBackgroundColor setFill];
     NSRectFill(fillerRect);
+}
+
+- (void)_drawTexturedThemeBackgroundRect:(NSRect)rect
+{
+    [[NSColor clearColor] setFill];
+    NSRectFill(rect);
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    NSGradient *titleGrad;
+    if ([self.window isKeyWindow]) {
+        // key window
+        titleGrad = [[NSGradient alloc] initWithStartingColor:kProWindowTitleGradientTopActive endingColor:kProWindowTitleGradientBottomActive];
+    } else {
+        // not key window
+        titleGrad = [[NSGradient alloc] initWithStartingColor:kProWindowTitleGradientTop endingColor:kProWindowTitleGradientBottom];
+    }
+    
+    // draw gradient
+    [titleGrad drawInRect:self.bounds angle:-90];
+    
+    [GRProColor drawNoiseTextureInRect:self.bounds];
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 #define kProWindowWidgetsTrackingAreaUserInfo @{@"widgets": @1}
@@ -389,7 +451,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (NSRect)_titlebarTitleRect
 {
     NSRect titleRect = [super _titlebarTitleRect];
-    titleRect.size.width += 1.0;
+    titleRect.size.width += [self _customTitleCell].attributedStringValue.size.width+4.0;
     titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
     
     return titleRect;

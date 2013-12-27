@@ -12,16 +12,10 @@
 
 + (void)drawNoiseTextureInRect:(NSRect)rect
 {
-    [[NSGraphicsContext currentContext] saveGraphicsState];
-    
-    [NSGraphicsContext saveGraphicsState];
     NSBezierPath *noiseFillPath = [NSBezierPath bezierPathWithRect:rect];
     [noiseFillPath addClip];
     [[NSColor colorWithPatternImage:[[GRThemeStore proThemeStore] imageNamed:@"noise"]] setFill];
     [noiseFillPath fill];
-    [NSGraphicsContext restoreGraphicsState];
-    
-    [[NSGraphicsContext currentContext] restoreGraphicsState];
 }
 
 + (void)drawBackgroundHighlightInRect:(NSRect)rect
