@@ -25,6 +25,20 @@ float toolbarHeightForWindow(NSWindow *window);
     id _autosaveButton;
 }
 
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+    [_closeButton setAlphaValue:0];
+    [_zoomButton setAlphaValue:0];
+    [_miniaturizeButton setAlphaValue:0];
+}
+
+- (void)windowWillExitFullScreen:(NSNotification *)notification
+{
+    [_closeButton setAlphaValue:1];
+    [_zoomButton setAlphaValue:1];
+    [_miniaturizeButton setAlphaValue:1];
+}
+
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
     self = [super initWithContentRect:contentRect styleMask:aStyle backing:bufferingType defer:flag];
@@ -40,6 +54,9 @@ float toolbarHeightForWindow(NSWindow *window);
     
     [self setOpaque:NO];
     [self setBackgroundColor:[NSColor clearColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillEnterFullScreen:) name:NSWindowWillEnterFullScreenNotification object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillExitFullScreen:) name:NSWindowWillExitFullScreenNotification object:self];
     
     return self;
 }
