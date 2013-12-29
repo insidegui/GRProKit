@@ -54,6 +54,7 @@ the source code of this utility will be released soon
 
 ## Screenshots
 
+![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_5.png)
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_1.png)
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_2.png)
 ![screenshot](https://raw.github.com/insidegui/GRProKit/master/screenshot_3.png)
