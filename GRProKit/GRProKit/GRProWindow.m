@@ -263,14 +263,14 @@ float toolbarHeightForWindow(NSWindow *window);
     NSRect titleBarRect = NSMakeRect(0, NSHeight(self.frame)-titlebarHeight, NSWidth(self.frame), titlebarHeight);
     
     [[self windowPath] addClip];
-
+    
     // paint the background color
     [kProWindowBackgroundColor setFill];
     NSRectFill(rect);
-
+    
     // we don't draw anything else if this window is inside a sheet
     if([self.window isSheet]) return;
-
+    
     // draw the title gradient according to the window's current status
     NSGradient *titleGrad;
     if ([self.window isKeyWindow]) {
@@ -280,10 +280,10 @@ float toolbarHeightForWindow(NSWindow *window);
         // not key window
         titleGrad = [[NSGradient alloc] initWithStartingColor:kProWindowTitleGradientTop endingColor:kProWindowTitleGradientBottom];
     }
-
+    
     // draw gradient
     [titleGrad drawInRect:titleBarRect angle:-90];
-
+    
     // draw titlebar highlight
     NSRect highlightRect = NSMakeRect(0, NSHeight(self.frame)-1, NSWidth(self.frame), 1);
     if ([self.window isKeyWindow]) {
@@ -334,7 +334,7 @@ float toolbarHeightForWindow(NSWindow *window);
     // the following code will draw the window's footer, if needed
     CGFloat windowContentBorderHeight = round([self.window contentBorderThicknessForEdge:NSMinYEdge]);
     if (windowContentBorderHeight == 0) return;
-
+    
     // footer gradient
     NSGradient *bottomGrad;
     if ([self.window isKeyWindow]) {
@@ -344,21 +344,21 @@ float toolbarHeightForWindow(NSWindow *window);
         // not key window
         bottomGrad = [[NSGradient alloc] initWithStartingColor:kProWindowBottomGradientTop endingColor:kProWindowBottomGradientBottom];
     }
-
+    
     // define a path for the footer
     NSRect bottomRect = NSMakeRect(0, -0.5, NSWidth(self.frame), windowContentBorderHeight+1);
     [bottomGrad drawInRect:bottomRect angle:-90];
-
+    
     // draw the separator between the window's content and footer
     NSRect bottomSeparatorRect = NSMakeRect(0, windowContentBorderHeight-1, NSWidth(self.frame), 1);
     [kProWindowTitleSeparatorColor setFill];
     NSRectFill(bottomSeparatorRect);
-
+    
     // draw footer highlight
     NSRect bottomHighlightRect = NSMakeRect(0, windowContentBorderHeight-2, NSWidth(self.frame), 1);
     [kProWindowBottomHighlightColor setFill];
     NSRectFill(bottomHighlightRect);
-
+    
     // draw footer shadowlet
     NSRect bottomShadowLetRect = NSMakeRect(0, -0.5, NSWidth(self.frame), 1.5);
     [kProWindowBottomShadowletColor setFill];
