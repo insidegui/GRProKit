@@ -245,6 +245,18 @@ float toolbarHeightForWindow(NSWindow *window);
     NSTrackingArea *_widgetTrackingArea;
 }
 
++ (NSDictionary *)widgetUserInfo
+{
+    static NSDictionary *_widgetUserInfo;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _widgetUserInfo = @{@"isWidget": @1};
+    });
+    
+    return _widgetUserInfo;
+}
+
 - (NSBezierPath *)windowPath
 {
     return [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
@@ -398,16 +410,14 @@ float toolbarHeightForWindow(NSWindow *window);
     [NSGraphicsContext restoreGraphicsState];
 }
 
-#define kProWindowWidgetsTrackingAreaUserInfo @{@"widgets": @1}
-
 // this is for the traffic lights
 - (void)updateTrackingAreas
 {
     for (NSTrackingArea *area in self.trackingAreas) {
-        if ([area.userInfo isEqualToDictionary:kProWindowWidgetsTrackingAreaUserInfo]) [self removeTrackingArea:area];
+        if (area.userInfo == [[self class] widgetUserInfo]) [self removeTrackingArea:area];
     }
     
-    _widgetTrackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8.0, NSHeight(self.frame)-6.0-15, 55.0, 15.0) options:NSTrackingActiveAlways|NSTrackingMouseEnteredAndExited|NSTrackingEnabledDuringMouseDrag owner:self userInfo:kProWindowWidgetsTrackingAreaUserInfo];
+    _widgetTrackingArea = [[NSTrackingArea alloc] initWithRect:NSMakeRect(8.0, NSHeight(self.frame)-6.0-15, 55.0, 15.0) options:NSTrackingActiveAlways|NSTrackingMouseEnteredAndExited|NSTrackingEnabledDuringMouseDrag owner:self userInfo:[[self class] widgetUserInfo]];
     [self addTrackingArea:_widgetTrackingArea];
     
     [super updateTrackingAreas];
@@ -416,8 +426,7 @@ float toolbarHeightForWindow(NSWindow *window);
 - (BOOL)isWidgetEvent:(NSEvent *)theEvent
 {
     if(theEvent.userData) {
-        NSDictionary *userInfo = (NSDictionary *)theEvent.userData;
-        if ([userInfo isEqualToDictionary:kProWindowWidgetsTrackingAreaUserInfo]) {
+        if (theEvent.userData == (__bridge void *)([[self class] widgetUserInfo])) {
             return YES;
         } else {
             return NO;
