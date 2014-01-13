@@ -473,16 +473,6 @@ float toolbarHeightForWindow(NSWindow *window);
     }
 }
 
-// modify title rect to accommodate bigger font size
-- (NSRect)_titlebarTitleRect
-{
-    NSRect titleRect = [super _titlebarTitleRect];
-    titleRect.size.width += [self _customTitleCell].attributedStringValue.size.width+4.0;
-    titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
-    
-    return titleRect;
-}
-
 - (NSTextFieldCell *)_customTitleCell
 {
     NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:self.window.title];
@@ -502,7 +492,11 @@ float toolbarHeightForWindow(NSWindow *window);
     if ([[self autosaveButton] title]) {
         [[self autosaveButton] setAttributedTitle:[[NSAttributedString alloc] initWithString:[[self autosaveButton] title] attributes:attributes]];
         NSRect autosaveRect = [[self autosaveButton] frame];
-        NSRect titleRect = [self _titlebarTitleRect];
+        
+        NSRect titleRect = [super _titlebarTitleRect];
+        titleRect.size.width += cell.attributedStringValue.size.width+4.0;
+        titleRect.size.height += [GRProFont windowTitleHeightOffsetForFont:[GRProFont proTitleFont]];
+        
         autosaveRect.size.height = titleRect.size.height;
         autosaveRect.origin.y = titleRect.origin.y-1;
         [[self autosaveButton] setFrame:autosaveRect];
