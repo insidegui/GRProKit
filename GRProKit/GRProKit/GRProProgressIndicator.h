@@ -14,18 +14,18 @@
  */
 
 // progress bar gradient colors from top to bottom, graphite
-#define kProgressBarProGradientColor0 [NSColor colorWithCalibratedRed:0.42f green:0.44f blue:0.47f alpha:1.0f]
-#define kProgressBarProGradientColor1 [NSColor colorWithCalibratedRed:0.38f green:0.42f blue:0.45f alpha:1.0f]
-#define kProgressBarProGradientColor2 [NSColor colorWithCalibratedRed:0.34f green:0.38f blue:0.43f alpha:1.0f]
-#define kProgressBarProGradientColor3 [NSColor colorWithCalibratedRed:0.36f green:0.41f blue:0.45f alpha:1.0f]
-#define kProgressBarProGradientColor4 [NSColor colorWithCalibratedRed:0.42f green:0.46f blue:0.47f alpha:1.0f]
+#define kProgressBarProGradientColor0 [NSColor colorWithCalibratedRed:0.261 green:0.415 blue:0.677 alpha:1.000]
+#define kProgressBarProGradientColor1 [NSColor colorWithCalibratedRed:0.120 green:0.284 blue:0.597 alpha:1.000]
+#define kProgressBarProGradientColor2 [NSColor colorWithCalibratedRed:0.095 green:0.258 blue:0.580 alpha:1.000]
+#define kProgressBarProGradientColor3 [NSColor colorWithCalibratedRed:0.119 green:0.325 blue:0.727 alpha:1.000]
+#define kProgressBarProGradientColor4 [NSColor colorWithCalibratedRed:0.159 green:0.402 blue:0.839 alpha:1.000]
 
 // progress bar gradient colors from top to bottom, inactive window
-#define kProgressBarInactiveGradientColor0 [NSColor colorWithCalibratedWhite:0.845 alpha:1.000]
-#define kProgressBarInactiveGradientColor1 [NSColor colorWithCalibratedWhite:0.737 alpha:1.000]
-#define kProgressBarInactiveGradientColor2 [NSColor colorWithCalibratedWhite:0.665 alpha:1.000]
-#define kProgressBarInactiveGradientColor3 [NSColor colorWithCalibratedWhite:0.585 alpha:1.000]
-#define kProgressBarInactiveGradientColor4 [NSColor colorWithCalibratedRed: 0.53 green: 0.587 blue: 0.662 alpha: 1]
+#define kProgressBarInactiveGradientColor0 [NSColor colorWithCalibratedRed:0.435 green:0.446 blue:0.467 alpha:1.000]
+#define kProgressBarInactiveGradientColor1 [NSColor colorWithCalibratedRed:0.308 green:0.325 blue:0.348 alpha:1.000]
+#define kProgressBarInactiveGradientColor2 [NSColor colorWithCalibratedRed:0.297 green:0.314 blue:0.337 alpha:1.000]
+#define kProgressBarInactiveGradientColor3 [NSColor colorWithCalibratedRed:0.400 green:0.426 blue:0.459 alpha:1.000]
+#define kProgressBarInactiveGradientColor4 [NSColor colorWithCalibratedRed:0.423 green:0.450 blue:0.484 alpha:1.000]
 
 // line after progress bar gradient colors from bottom to top
 #define kProgressBarProgressLineGradient0 [NSColor colorWithCalibratedWhite:0.3 alpha:1.0f]

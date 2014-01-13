@@ -277,13 +277,6 @@
     // the progress bar rectangle
     NSBezierPath *rectanglePath = [NSBezierPath bezierPathWithRect:progressBarRect];
     [_progressBarGradient drawInBezierPath: rectanglePath angle: -90];
-    
-    // draw line after progress bar
-    
-    if(!_progressBarLineGradient) _progressBarLineGradient = [[NSGradient alloc] initWithStartingColor: kProgressBarProgressLineGradient0 endingColor: kProgressBarProgressLineGradient1];
-    
-    NSBezierPath *progressLinePath = [NSBezierPath bezierPathWithRect: NSMakeRect(NSWidth(progressBarRect)+1, progressBarRect.origin.y, 1, NSHeight(progressBarRect))];
-    [_progressBarLineGradient drawInBezierPath: progressLinePath angle: 90];
 }
 
 
