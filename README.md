@@ -49,8 +49,7 @@ this is good because:
 - It is compressed, so the framework size is smaller
 - It keeps all files inside this container, making organization easier
 
-I've created a command line utility to package a set of resources to this custom file format,
-the source code of this utility will be released soon
+For more information check out [GRThemeStore](https://github.com/insidegui/GRThemeStore)
 
 ## Screenshots
 
@@ -64,4 +63,6 @@ the source code of this utility will be released soon
 
 You can contribute with code, just send me a pull request, or open an issue for any bug/enhancement.
 
-If you like this and will use It in one of your apps, you can show me some love by [donating through PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=386Y2DFSN5X94&lc=BR&item_name=Guilherme%20Rambo&item_number=1001&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+Disclaimer: sending a pull request does not mean I will accept It, if I don't accept your pull request It doesn't mean I don't love you ;)
+
+If you like this and will use It to make your app look serious, you can show me some love by [donating through PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=386Y2DFSN5X94&lc=BR&item_name=Guilherme%20Rambo&item_number=1001&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
