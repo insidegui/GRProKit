@@ -52,8 +52,8 @@ float toolbarHeightForWindow(NSWindow *window);
     
     [self layoutTrafficLights];
     
-    [self setOpaque:NO];
-    [self setBackgroundColor:[NSColor clearColor]];
+    [self setOpaque:YES];
+    [self setBackgroundColor:kProWindowBackgroundColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillEnterFullScreen:) name:NSWindowWillEnterFullScreenNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillExitFullScreen:) name:NSWindowWillExitFullScreenNotification object:self];
