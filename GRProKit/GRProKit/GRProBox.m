@@ -29,18 +29,21 @@
 
 - (void)setupLabel
 {
-    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(8, NSHeight(self.frame)-15, NSWidth(self.frame)*0.8, 15)];
+    _titleLabel = [[GRProLabel alloc] initWithFrame:NSMakeRect(8, NSHeight(self.frame)-20, NSWidth(self.frame)*0.8, 20)];
     [_titleLabel setAutoresizingMask:NSViewMinXMargin|NSViewMaxYMargin];
     [_titleLabel setTextColor:[NSColor colorWithCalibratedWhite:0.642 alpha:1.000]];
-    NSShadow *titleShadow = [[NSShadow alloc] init];
+    
+	NSShadow *titleShadow = [[NSShadow alloc] init];
     titleShadow.shadowBlurRadius = 0.5;
     titleShadow.shadowOffset = NSMakeSize(0, 1);
     titleShadow.shadowColor = [NSColor colorWithCalibratedWhite:0 alpha:0.7];
     [_titleLabel setShadow:titleShadow];
+	
     NSString *title = (self.title)? self.title : @"";
     [_titleLabel setStringValue:title];
     [_titleLabel setAutoresizingMask:NSViewMaxXMargin|NSViewMinYMargin];
-    [self addSubview:_titleLabel];
+    
+	[self addSubview:_titleLabel];
 }
 
 - (void)setTitle:(NSString *)title
@@ -52,7 +55,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSBezierPath *shape = [NSBezierPath bezierPathWithRect:self.frame];
+    NSBezierPath *shape = [NSBezierPath bezierPathWithRect:self.bounds];
     [kProBoxBackgroundColor setFill];
     [shape fill];
     

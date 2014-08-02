@@ -58,6 +58,11 @@
     return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize];
 }
 
++ (NSFont *)proLabelFontWithSize:(CGFloat) size {
+    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:size+1];
+    return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:size];
+}
+
 + (NSFont *)proControlFont
 {
     NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];

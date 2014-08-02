@@ -27,6 +27,7 @@
 + (BOOL)CTFontIsDefaultProFont:(CTFontRef)font;
 + (CGFloat)menuFontSize;
 + (NSFont *)proLabelFont;
++ (NSFont *)proLabelFontWithSize:(CGFloat) size;
 + (NSFont *)proControlFont;
 + (NSFont *)proTitleFont;
 + (NSFont *)proToolbarFont;
