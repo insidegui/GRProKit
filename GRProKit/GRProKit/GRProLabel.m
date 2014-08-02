@@ -34,8 +34,12 @@
     [self setBordered:NO];
     [self setDrawsBackground:NO];
     [self setEditable:NO];
-    
-    [self setFont:[GRProFont proLabelFont]];
+	
+	if(self.refusesFirstResponder) {
+		[self setFont:[GRProFont proLabelFontWithSize:self.font.pointSize]];
+	} else {
+		[self setFont:[GRProFont proLabelFont]];
+	}
 }
 
 + (NSShadow *)proFontShadow
