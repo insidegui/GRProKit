@@ -17,6 +17,8 @@
 #import "GRProAlert.h"
 #import "GRProProgressIndicator.h"
 #import "GRProTableView.h"
+#import "GRProMenu.h"
+#import "GRProColor.h"
 
 int GRProApplicationMain(int argc, const char **argv);
 

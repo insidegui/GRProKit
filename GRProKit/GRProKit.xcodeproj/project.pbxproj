@@ -22,12 +22,12 @@
 		DD7718271822AC7800482CBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD7718251822AC7800482CBE /* InfoPlist.strings */; };
 		DD7718581822B09E00482CBE /* GRProWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7718561822B09E00482CBE /* GRProWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD7718591822B09E00482CBE /* GRProWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7718571822B09E00482CBE /* GRProWindow.m */; };
-		DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7EC7AC186BBD4900AA527C /* GRProMenu.h */; };
+		DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7EC7AC186BBD4900AA527C /* GRProMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD7EC7AF186BBD4900AA527C /* GRProMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7EC7AD186BBD4900AA527C /* GRProMenu.m */; };
 		DD7EC7B1186BBDA000AA527C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7EC7B0186BBDA000AA527C /* Carbon.framework */; };
 		DD7EC7B4186BC09F00AA527C /* GRProFont.h in Headers */ = {isa = PBXBuildFile; fileRef = DD7EC7B2186BC09F00AA527C /* GRProFont.h */; };
 		DD7EC7B5186BC09F00AA527C /* GRProFont.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7EC7B3186BC09F00AA527C /* GRProFont.m */; };
-		DD88248D186CEDC9002975DE /* GRProColor.h in Headers */ = {isa = PBXBuildFile; fileRef = DD88248B186CEDC9002975DE /* GRProColor.h */; };
+		DD88248D186CEDC9002975DE /* GRProColor.h in Headers */ = {isa = PBXBuildFile; fileRef = DD88248B186CEDC9002975DE /* GRProColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD88248E186CEDC9002975DE /* GRProColor.m in Sources */ = {isa = PBXBuildFile; fileRef = DD88248C186CEDC9002975DE /* GRProColor.m */; };
 		DDBDA3601826B0F1006D744F /* GRThemePiece.h in Headers */ = {isa = PBXBuildFile; fileRef = DDBDA3591826B0F1006D744F /* GRThemePiece.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDBDA3611826B0F1006D744F /* GRThemePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDA35A1826B0F1006D744F /* GRThemePiece.m */; };
@@ -236,7 +236,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */,
 				DD5A2C021825E1B100332C2F /* GRProBox.h in Headers */,
 				DDBDA3661826B0F1006D744F /* ThemeFile.h in Headers */,
 				DDBDA3921826F92D006D744F /* GRProProgressIndicator.h in Headers */,
@@ -247,11 +246,12 @@
 				DD5A2C0A1825E99400332C2F /* GRProButton.h in Headers */,
 				DDBDA3601826B0F1006D744F /* GRThemePiece.h in Headers */,
 				DD5187E8186101CC008C10CD /* GRProTableView.h in Headers */,
+				DD88248D186CEDC9002975DE /* GRProColor.h in Headers */,
+				DD7EC7AE186BBD4900AA527C /* GRProMenu.h in Headers */,
 				DDBDA3621826B0F1006D744F /* GRThemeStore.h in Headers */,
 				DDBDA3641826B0F1006D744F /* NSData+ZLib.h in Headers */,
 				DD7EC7B4186BC09F00AA527C /* GRProFont.h in Headers */,
 				DD5A2C061825E7B900332C2F /* GRProSplitView.h in Headers */,
-				DD88248D186CEDC9002975DE /* GRProColor.h in Headers */,
 				DD5A2BFA1825DEBF00332C2F /* GRProLabel.h in Headers */,
 				DD7718581822B09E00482CBE /* GRProWindow.h in Headers */,
 			);

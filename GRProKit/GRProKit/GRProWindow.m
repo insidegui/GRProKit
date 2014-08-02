@@ -52,9 +52,10 @@ float toolbarHeightForWindow(NSWindow *window);
     
     [self layoutTrafficLights];
     
+	// lol transparent windows
     [self setOpaque:YES];
     [self setBackgroundColor:kProWindowBackgroundColor];
-    
+	
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillEnterFullScreen:) name:NSWindowWillEnterFullScreenNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillExitFullScreen:) name:NSWindowWillExitFullScreenNotification object:self];
     
@@ -471,6 +472,12 @@ float toolbarHeightForWindow(NSWindow *window);
             [widget setHover:NO];
         }
     }
+}
+
+- (NSRect) _titlebarTitleRect {
+	NSRect r = [super _titlebarTitleRect];
+	r.size.width += 4;
+	return r;
 }
 
 - (NSTextFieldCell *)_customTitleCell
