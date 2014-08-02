@@ -193,6 +193,9 @@
     self.headerView.frame = headerRect;
     self.backgroundColor = [NSColor colorWithCalibratedRed:0.16f green:0.16f blue:0.17f alpha:1.0f];
     self.rowHeight = kProTableViewStandardRowHeight;
+	
+	// cause scroll view to draw correctly
+	self.enclosingScrollView.backgroundColor = self.backgroundColor;
 }
 
 - (void)drawBackgroundInClipRect:(NSRect)dirtyRect
