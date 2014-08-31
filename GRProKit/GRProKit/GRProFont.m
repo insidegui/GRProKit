@@ -7,12 +7,17 @@
 //
 
 #import "GRProFont.h"
+#import "GRProKit-Private.h"
 #import <objc/runtime.h>
 
 @implementation GRProFont
 
 + (void)load
 {
+    if ([GRProKit isInSyrah]) {
+        return;
+    }
+    
     Method m0 = class_getClassMethod([NSFont class], @selector(systemFontOfSize:));
     Method m1 = class_getClassMethod([self class], @selector(systemFontOfSize:));
     method_exchangeImplementations(m0, m1);
@@ -54,31 +59,51 @@
 
 + (NSFont *)proLabelFont
 {
-    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
-    return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize];
+    if ([GRProKit isInSyrah]) {
+        return [NSFont systemFontOfSize:kGRProKitDefaultFontSize];
+    } else {
+        NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
+        return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize];
+    }
 }
 
 + (NSFont *)proLabelFontWithSize:(CGFloat) size {
-    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:size+1];
-    return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:size];
+    if ([GRProKit isInSyrah]) {
+        return [NSFont systemFontOfSize:size];
+    } else {
+        NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:size+1];
+        return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:size];
+    }
 }
 
 + (NSFont *)proControlFont
 {
-    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
-    return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize-1];
+    if ([GRProKit isInSyrah]) {
+        return [NSFont controlContentFontOfSize:kGRProKitDefaultFontSize];
+    } else {
+        NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
+        return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize-1];
+    }
 }
 
 + (NSFont *)proToolbarFont
 {
-    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize-1];
-    return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize-2];
+    if ([GRProKit isInSyrah]) {
+        return [NSFont systemFontOfSize:kGRProKitDefaultFontSize-2];
+    } else {
+        NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize-1];
+        return [NSFont fontWithDescriptor:[descriptor fontDescriptorWithSymbolicTraits:NSFontBoldTrait] size:kGRProKitDefaultFontSize-2];
+    }
 }
 
 + (NSFont *)proTitleFont
 {
-    NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
-    return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize+1];
+    if ([GRProKit isInSyrah]) {
+        return [NSFont titleBarFontOfSize:kGRProKitDefaultFontSize+1];
+    } else {
+        NSFontDescriptor *descriptor = [[self class] proFontDescriptorWithSize:kGRProKitDefaultFontSize+1];
+        return [NSFont fontWithDescriptor:descriptor size:kGRProKitDefaultFontSize+1];
+    }
 }
 
 + (CGFloat)windowTitleHeightOffsetForFont:(NSFont *)font

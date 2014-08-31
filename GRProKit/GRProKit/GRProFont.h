@@ -19,7 +19,7 @@
 #define kGRProKitPreferredFontBoundingBox NSMakeRect(-13.3095703125, -6.7333984375, 33.55078125, 22.435546875)
 
 // offset for window's titles according to the font being used
-#define kGRProKitDefaultFontTitleHeightOffset 0.0
+#define kGRProKitDefaultFontTitleHeightOffset -0.0
 #define kGRProKitFallbackFontTitleHeightOffset 0.0
 
 @interface GRProFont : NSFont
