@@ -22,4 +22,11 @@ int GRProApplicationMain(int argc, const char **argv)
     [[NSUserDefaults standardUserDefaults] setVolatileDomain:@{@"AppleAquaColorVariant": @6} forName:NSArgumentDomain];
 }
 
++ (BOOL)isInSyrah
+{
+    NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+    
+    return (version.majorVersion >= 10 && version.minorVersion >= 10);
+}
+
 @end

@@ -10,9 +10,16 @@
 #import "GRProFont.h"
 #import "GRProColor.h"
 #import "GRProLabel.h"
+#import "GRProKit-Private.h"
 #import <objc/runtime.h>
 
 float toolbarHeightForWindow(NSWindow *window);
+
+@interface GRProWindow ()
+
+@property (readonly) GRProThemeFrame *frameView;
+
+@end
 
 @implementation GRProWindow
 {
@@ -23,6 +30,11 @@ float toolbarHeightForWindow(NSWindow *window);
     GRProLabel *_titleLabel;
     
     id _autosaveButton;
+}
+
+- (void)windowDidEnterFullScreen:(NSNotification *)notification
+{
+    [self layoutFullscreenTrafficLights];
 }
 
 - (void)windowWillEnterFullScreen:(NSNotification *)notification
@@ -57,6 +69,7 @@ float toolbarHeightForWindow(NSWindow *window);
     [self setBackgroundColor:kProWindowBackgroundColor];
 	
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillEnterFullScreen:) name:NSWindowWillEnterFullScreenNotification object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidEnterFullScreen:) name:NSWindowDidEnterFullScreenNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillExitFullScreen:) name:NSWindowWillExitFullScreenNotification object:self];
     
     return self;
@@ -70,6 +83,11 @@ float toolbarHeightForWindow(NSWindow *window);
 + (Class)frameViewClassForStyleMask:(NSUInteger)styleMask
 {
     return [GRProThemeFrame class];
+}
+
+- (GRProThemeFrame *)frameView
+{
+    return [self.contentView superview];
 }
 
 // traffic light margin from the top of the window
@@ -119,6 +137,27 @@ float toolbarHeightForWindow(NSWindow *window);
     if (self.hideTrafficLights) [self doHideTrafficLights];
 }
 
+- (void)layoutFullscreenTrafficLights
+{
+    if (![GRProKit isInSyrah]) return;
+    
+    [_closeButton removeFromSuperview];
+    [_closeButton setFrameOrigin:NSMakePoint(kTrafficlightDistanceFromWindow, kTrafficlightMargin)];
+    [self.frameView.titlebarContainerView addSubview:_closeButton];
+
+    [_miniaturizeButton removeFromSuperview];
+    [_miniaturizeButton setFrameOrigin:NSMakePoint(kTrafficlightDistanceFromWindow+kTrafficLightPadding+kTrafficLightSize, kTrafficlightMargin)];
+    [self.frameView.titlebarContainerView addSubview:_miniaturizeButton];
+    
+    [_zoomButton removeFromSuperview];
+    [_zoomButton setFrameOrigin:NSMakePoint(kTrafficlightDistanceFromWindow*2+kTrafficLightSize*2, kTrafficlightMargin)];
+    [self.frameView.titlebarContainerView addSubview:_zoomButton];
+    
+    [_closeButton setAlphaValue:1];
+    [_miniaturizeButton setAlphaValue:1];
+    [_zoomButton setAlphaValue:1];
+}
+
 - (void)doHideTrafficLights {
     [_closeButton setHidden:YES];
     [_miniaturizeButton setHidden:YES];
@@ -163,7 +202,14 @@ float toolbarHeightForWindow(NSWindow *window);
             [self.window miniaturize:self];
             break;
         default:
-            [self.window zoom:self];
+            if ([GRProKit isInSyrah] &&
+                (self.window.collectionBehavior & NSWindowCollectionBehaviorFullScreenAuxiliary ||
+                 self.window.collectionBehavior & NSWindowCollectionBehaviorFullScreenPrimary) &&
+                !([NSEvent modifierFlags] & NSAlternateKeyMask)) {
+                [self.window toggleFullScreen:self];
+            } else {
+                [self.window zoom:self];
+            }
             break;
     }
     
@@ -482,7 +528,9 @@ float toolbarHeightForWindow(NSWindow *window);
 
 - (NSTextFieldCell *)_customTitleCell
 {
-    NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:self.window.title];
+    NSString *title = (self.window.title) ? self.window.title : @"";
+    
+    NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:title];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSLeftTextAlignment;
     NSShadow *titleShadow = [[NSShadow alloc] init];
@@ -493,7 +541,7 @@ float toolbarHeightForWindow(NSWindow *window);
     NSColor *titleColor = (self.window.isKeyWindow) ? kProWindowTitleColor : kProWindowTitleColorNoKey;
     
     NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proTitleFont], NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
-    cell.attributedStringValue = [[NSAttributedString alloc] initWithString:self.window.title attributes:attributes];
+    cell.attributedStringValue = [[NSAttributedString alloc] initWithString:title attributes:attributes];
     
     // also update our "edited" label's attributes
     if ([[self autosaveButton] title]) {

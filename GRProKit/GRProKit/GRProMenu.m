@@ -9,6 +9,7 @@
 
 #import "GRProMenu.h"
 #import "GRProFont.h"
+#import "GRProKit-Private.h"
 #import <objc/runtime.h>
 
 #import <Carbon/Carbon.h>
@@ -140,7 +141,9 @@ static int MAKE_DARK_KEY;
     self = [super init];
     if(!self) return nil;
     
-    self.isDark = YES;
+    if (![GRProKit isInSyrah]) {
+        self.isDark = YES;
+    }
     
     return self;
 }
@@ -150,7 +153,9 @@ static int MAKE_DARK_KEY;
     self = [super initWithCoder:aDecoder];
     if(!self) return nil;
     
-    self.isDark = YES;
+    if (![GRProKit isInSyrah]) {
+        self.isDark = YES;
+    }
     
     return self;
 }
