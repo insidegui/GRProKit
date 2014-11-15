@@ -36,11 +36,6 @@
     return CGColorRetain(color);
 }
 
-+ (NSColor *)textBackgroundColor
-{
-    return [GRProTheme defaultTheme].windowBackgroundColor;
-}
-
 + (NSColor *)alternateSelectedControlColor
 {
     return [GRProTheme defaultTheme].alternateSelectedControlColor;

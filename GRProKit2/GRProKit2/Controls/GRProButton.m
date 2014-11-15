@@ -8,12 +8,13 @@
 
 #import "GRProButton.h"
 
+#import "GRProButtonCell.h"
+
 @implementation GRProButton
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
++ (Class)cellClass
+{
+    return [GRProButtonCell class];
 }
 
 @end

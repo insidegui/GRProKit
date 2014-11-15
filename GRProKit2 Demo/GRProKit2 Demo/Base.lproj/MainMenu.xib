@@ -677,9 +677,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CuM-Yp-W7w">
-                        <rect key="frame" x="20" y="293" width="232" height="22"/>
+                        <rect key="frame" x="20" y="293" width="381" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="232" id="rv0-cB-8aT"/>
+                            <constraint firstAttribute="width" constant="381" id="rv0-cB-8aT"/>
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zlp-Qb-azy">
                             <font key="font" metaFont="system"/>
@@ -695,11 +695,41 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhG-eI-Kaq" customClass="GRProButton">
+                        <rect key="frame" x="325" y="257" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Faf-nc-44g" customClass="GRProButtonCell">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kug-6w-lWL" customClass="GRProButton">
+                        <rect key="frame" x="187" y="257" width="139" height="32"/>
+                        <buttonCell key="cell" type="push" title="Disabled Button" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2HV-VQ-98X" customClass="GRProButtonCell">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mEw-SQ-JTT" customClass="GRProButton">
+                        <rect key="frame" x="58" y="257" width="129" height="32"/>
+                        <buttonCell key="cell" type="push" title="Default Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KmE-mB-yyr" customClass="GRProButtonCell">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Aji-QH-fUg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="Jnj-tG-WaV"/>
                     <constraint firstItem="CuM-Yp-W7w" firstAttribute="top" secondItem="Aji-QH-fUg" secondAttribute="bottom" constant="8" id="OiM-pL-7fa"/>
+                    <constraint firstItem="nhG-eI-Kaq" firstAttribute="leading" secondItem="kug-6w-lWL" secondAttribute="trailing" constant="11" id="Vci-O9-JUd"/>
+                    <constraint firstItem="nhG-eI-Kaq" firstAttribute="trailing" secondItem="CuM-Yp-W7w" secondAttribute="trailing" id="WL7-t8-MM1"/>
                     <constraint firstItem="CuM-Yp-W7w" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="cRo-6W-qhR"/>
+                    <constraint firstItem="kug-6w-lWL" firstAttribute="top" secondItem="CuM-Yp-W7w" secondAttribute="bottom" constant="8" id="geg-Wt-26A"/>
+                    <constraint firstItem="mEw-SQ-JTT" firstAttribute="top" secondItem="CuM-Yp-W7w" secondAttribute="bottom" constant="8" id="hJu-dL-aOg"/>
+                    <constraint firstItem="kug-6w-lWL" firstAttribute="leading" secondItem="mEw-SQ-JTT" secondAttribute="trailing" constant="12" id="lz5-WY-tzW"/>
+                    <constraint firstItem="nhG-eI-Kaq" firstAttribute="top" secondItem="CuM-Yp-W7w" secondAttribute="bottom" constant="8" id="mrG-On-VO8"/>
                     <constraint firstItem="Aji-QH-fUg" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="nRa-ha-c8W"/>
                 </constraints>
             </view>

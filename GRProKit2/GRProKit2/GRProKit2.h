@@ -23,6 +23,10 @@ FOUNDATION_EXPORT const unsigned char GRProKit2VersionString[];
 
 #import <GRProKit2/GRProSegmentedControl.h>
 #import <GRProKit2/GRProSegmentedCell.h>
+#import <GRProKit2/GRProSearchField.h>
+#import <GRProKit2/GRProSearchFieldCell.h>
+#import <GRProKit2/GRProButton.h>
+#import <GRProKit2/GRProButtonCell.h>
 
 @interface GRProKit2 : NSObject
 @end
