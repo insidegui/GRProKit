@@ -36,4 +36,29 @@
     return CGColorRetain(color);
 }
 
++ (NSColor *)textBackgroundColor
+{
+    return [GRProTheme defaultTheme].windowBackgroundColor;
+}
+
++ (NSColor *)alternateSelectedControlColor
+{
+    return [GRProTheme defaultTheme].alternateSelectedControlColor;
+}
+
++ (NSColor *)headerColor
+{
+    return [GRProTheme defaultTheme].headerColor;
+}
+
++ (NSColor *)headerTextColor
+{
+    return [GRProTheme defaultTheme].headerTextColor;
+}
+
++ (NSColor *)gridColor
+{
+    return [GRProTheme defaultTheme].gridColor;
+}
+
 @end
