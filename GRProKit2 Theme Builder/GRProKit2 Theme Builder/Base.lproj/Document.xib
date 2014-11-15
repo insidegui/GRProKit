@@ -12,7 +12,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window" customClass="GRProWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="507" height="413"/>
@@ -29,10 +29,10 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="39" rowSizeStyle="automatic" viewBased="YES" id="ZE7-tN-or9">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn width="504" minWidth="40" maxWidth="1000" id="2jK-a1-iwK">
@@ -89,7 +89,7 @@
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Fnd-eV-qGv">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
