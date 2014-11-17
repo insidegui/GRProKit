@@ -2,6 +2,10 @@
 
 AppKit "replacement" to replicate the Pro App look
 
+# 10.10 and up: GRProKit 2
+
+If you're targeting OS X 10.10 and up, use (GRProKit2)[https://github.com/insidegui/GRProKit/tree/GRProKit2]
+
 ## Currently Available Controls
 
 ## GRProWindow
