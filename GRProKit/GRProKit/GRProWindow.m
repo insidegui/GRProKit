@@ -263,6 +263,16 @@ float toolbarHeightForWindow(NSWindow *window);
     return [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
 }
 
+- (void)drawRect:(NSRect)dirtyRect
+{
+    [super drawRect:dirtyRect];
+    
+    if (self.window.styleMask & NSTexturedBackgroundWindowMask) {
+        [[self windowPath] addClip];
+        [self _drawTexturedThemeBackgroundRect:dirtyRect];
+    }
+}
+
 - (void)_drawTitleBarBackgroundInClipRect:(NSRect)rect
 {
     [[NSColor clearColor] setFill];
@@ -326,9 +336,7 @@ float toolbarHeightForWindow(NSWindow *window);
     
     [[self windowPath] addClip];
     
-    if(self.window.styleMask & NSTexturedBackgroundWindowMask) {
-        [self _drawTexturedThemeBackgroundRect:rect];
-    } else {
+    if(!(self.window.styleMask & NSTexturedBackgroundWindowMask)) {
         [kProWindowBackgroundColor setFill];
         NSRectFill(rect);
         
@@ -482,7 +490,10 @@ float toolbarHeightForWindow(NSWindow *window);
 
 - (NSTextFieldCell *)_customTitleCell
 {
-    NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:self.window.title];
+    NSString *title = self.window.title;
+    if (!title) title = @"";
+    
+    NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:title];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSLeftTextAlignment;
     NSShadow *titleShadow = [[NSShadow alloc] init];
@@ -493,7 +504,7 @@ float toolbarHeightForWindow(NSWindow *window);
     NSColor *titleColor = (self.window.isKeyWindow) ? kProWindowTitleColor : kProWindowTitleColorNoKey;
     
     NSDictionary *attributes = @{NSFontAttributeName: [GRProFont proTitleFont], NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : titleColor, NSShadowAttributeName : titleShadow};
-    cell.attributedStringValue = [[NSAttributedString alloc] initWithString:self.window.title attributes:attributes];
+    cell.attributedStringValue = [[NSAttributedString alloc] initWithString:title attributes:attributes];
     
     // also update our "edited" label's attributes
     if ([[self autosaveButton] title]) {
